@@ -15,6 +15,7 @@
 #import "CompanyInfoViewController.h"
 #import "ViewController.h"
 #import "unity.h"
+#import "PromotionTripViewController.h"
 
 @interface DEMOMenuViewController (){
     AppDelegate*appDelegate;
@@ -23,7 +24,6 @@
     UIStoryboard *mainStoryboard;
     NavigationController *navigationController;
     UIStoryboard *mainStoryboard1;
-
 }
 
 @end
@@ -108,21 +108,22 @@
     }
     else if (indexPath.row == 3)
     {
-       
+        PromotionTripViewController *controller = (PromotionTripViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"PromotionTripViewController"];
+        [navigationController pushViewController:controller animated:YES];
     }
     else if (indexPath.row == 6)
     {
         ViewController  *controller = (ViewController *)[mainStoryboard1 instantiateViewControllerWithIdentifier: @"ViewController"];
         [navigationController pushViewController:controller animated:YES];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
-        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
-        NSDictionary * dict = [defs dictionaryRepresentation];
-        for (id key in dict) {
-            [defs removeObjectForKey:key];
-        }
-        [defs synchronize];
-        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+//        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+//        NSDictionary * dict = [defs dictionaryRepresentation];
+//        for (id key in dict) {
+//            [defs removeObjectForKey:key];
+//        }
+//        [defs synchronize];
+//        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+//        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         [unity LogOut:idDriver];
     }
     self.frostedViewController.contentViewController = navigationController;
@@ -157,7 +158,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-        NSArray *titles = @[@"Home", @"Profile", @"History", @"Promotion Trips",@"My Promotion Trips", @"Contact",@"Logout"];
+        NSArray *titles = @[@"Home", @"Profile", @"History", @"Promotion Trips",@"About US", @"Support",@"Logout"];
         cell.textLabel.text = titles[indexPath.row];
     
     return cell;

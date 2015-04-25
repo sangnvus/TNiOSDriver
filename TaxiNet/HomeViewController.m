@@ -89,42 +89,43 @@
 -(void) receiveNotification:(NSNotification *) notification
 {
     if ([[notification name]isEqualToString:@"getRiderInfo"]) {
-        
-        [UIView beginAnimations:@"animateAddContentView" context:nil];
-        [UIView setAnimationDuration:0.4];
-        [self showDetailRider];
-        [UIView commitAnimations];
-        
-        NSDictionary *data=appdelegate.RiderInfo;
-        NSString *name=[data objectForKey:@"name"];
-        NSString *phone=[data objectForKey:@"phone"];
-        NSString *adressFrom=[data objectForKey:@"fromAddress"];
-        NSString *adressTo=[data objectForKey:@"toAddress"];
-        self.riderName.text=name;
-        self.riderPhone.text=phone;
-        self.riderFrom.text=adressFrom;
-        self.riderTo.text=adressTo;
-        [[NSUserDefaults standardUserDefaults] setObject:[data objectForKey:@"id"] forKey:@"requestID"];
-
- 
-        NSString *latitu=[data objectForKey:@"startLatitude"];
-        NSString *lontitu=[data objectForKey:@"startLongitude"];
-        coordinateTo.latitude=[latitu doubleValue];
-        coordinateTo.longitude=[lontitu doubleValue];
-        placeFrom = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([latitu doubleValue], [lontitu doubleValue]) addressDictionary:nil];
-                                  
-        NSString* longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
-        NSString* latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
-        coordinateFrom.latitude=[latitude doubleValue];
-        coordinateFrom.longitude=[longitude doubleValue];
-        placeTo = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]) addressDictionary:nil];
-        [self findWay];
-        
-        JPSThumbnail *empire = [[JPSThumbnail alloc] init];
-        empire.image = [UIImage imageNamed:@"toMap"];
-        empire.coordinate = CLLocationCoordinate2DMake([latitu floatValue], [lontitu floatValue]);
-        [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:empire]];
-        self.ViewDetail.hidden=NO;
+        if (appdelegate.RiderInfo.count != 0) {
+            [UIView beginAnimations:@"animateAddContentView" context:nil];
+            [UIView setAnimationDuration:0.4];
+            [self showDetailRider];
+            [UIView commitAnimations];
+            
+            NSDictionary *data=appdelegate.RiderInfo;
+            NSString *name=[data objectForKey:@"name"];
+            NSString *phone=[data objectForKey:@"phone"];
+            NSString *adressFrom=[data objectForKey:@"fromAddress"];
+            NSString *adressTo=[data objectForKey:@"toAddress"];
+            self.riderName.text=name;
+            self.riderPhone.text=phone;
+            self.riderFrom.text=adressFrom;
+            self.riderTo.text=adressTo;
+            [[NSUserDefaults standardUserDefaults] setObject:[data objectForKey:@"id"] forKey:@"requestID"];
+            
+            
+            NSString *latitu=[data objectForKey:@"startLatitude"];
+            NSString *lontitu=[data objectForKey:@"startLongitude"];
+            coordinateTo.latitude=[latitu doubleValue];
+            coordinateTo.longitude=[lontitu doubleValue];
+            placeFrom = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([latitu doubleValue], [lontitu doubleValue]) addressDictionary:nil];
+            
+            NSString* longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
+            NSString* latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+            coordinateFrom.latitude=[latitude doubleValue];
+            coordinateFrom.longitude=[longitude doubleValue];
+            placeTo = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]) addressDictionary:nil];
+            [self findWay];
+            
+            JPSThumbnail *empire = [[JPSThumbnail alloc] init];
+            empire.image = [UIImage imageNamed:@"toMap"];
+            empire.coordinate = CLLocationCoordinate2DMake([latitu floatValue], [lontitu floatValue]);
+            [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:empire]];
+            self.ViewDetail.hidden=NO;
+        }
     }
     if ([[notification name]isEqualToString:@"updatecurrentStatus"]) {
     }
@@ -150,6 +151,7 @@
     empire.image = [UIImage imageNamed:@"toMap"];
     empire.coordinate = CLLocationCoordinate2DMake([latitu floatValue], [lontitu floatValue]);
     [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:empire]];
+    
     NSString* longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
     NSString* latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
     coordinateFrom.latitude=[latitude doubleValue];
@@ -230,28 +232,33 @@
     if (pickRider==1) {
         [self.btnAcept setTitle:@"Complete" forState:UIControlStateNormal];
         [unity updateTrip:requestid userID:idDriver status:@"PD" owner:self];
-        UIAlertView *errorAlert = [[UIAlertView alloc]
+        UIAlertView *Alert = [[UIAlertView alloc]
                                    initWithTitle:@"Cost" message:@"You have 3000d" delegate:self
-                                   cancelButtonTitle:@"Cancel"
-                                   otherButtonTitles:@"OK", nil];
-        [errorAlert show];
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil];
+        Alert.tag = 1;
+        [Alert show];
+        [unity updateTrip:requestid userID:idDriver status:@"PD" owner:self];
+
+        [self.mapview removeOverlays:self.mapview.overlays];
+        NSInteger toRemoveCount = mapview.annotations.count;
+        NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:toRemoveCount];
+        for (id annotation in mapview.annotations)
+            if (annotation != mapview.userLocation)
+                [toRemove addObject:annotation];
+        [mapview removeAnnotations:toRemove];
     }
-    if (pickRider==2) {
-
-
-    }
-
 }
 - (void)alertView:(UIAlertView *)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == [alertView cancelButtonIndex]){
-        //cancel clicked ...do your action
-    }else{
-        NSString* requestid = [[NSUserDefaults standardUserDefaults] stringForKey:@"requestID"];
-        NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
-        [unity CompleteTrip:requestid cost:@"5000" distance:@"123" owner:self];
-        [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
-        self.ViewDetail.hidden=YES;    }
+    if (alertView.tag==1) {
+        if (buttonIndex == [alertView cancelButtonIndex]){
+            NSString* requestid = [[NSUserDefaults standardUserDefaults] stringForKey:@"requestID"];
+            [unity CompleteTrip:requestid cost:@"5000" distance:@"123" owner:self];
+            [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
+            self.ViewDetail.hidden=YES;
+        }
+    }
 }
 - (IBAction)Cancel:(id)sender {
     NSString* requestid = [[NSUserDefaults standardUserDefaults] stringForKey:@"requestID"];
@@ -259,14 +266,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [unity updateTrip:requestid userID:idDriver status:@"CA" owner:self];
     self.ViewDetail.hidden=YES;
 }
-
 - (IBAction)show:(id)sender {
-    
     [self updateCurrentStatus];
-
-
 }
-
 - (void) getReverseGeocode:(CLLocationCoordinate2D) coordinate
 {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -363,19 +365,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     routeLineRenderer.lineWidth = 3;
     return routeLineRenderer;
 }
-
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     if ([view conformsToProtocol:@protocol(JPSThumbnailAnnotationViewProtocol)]) {
         [((NSObject<JPSThumbnailAnnotationViewProtocol> *)view) didSelectAnnotationViewInMap:mapView];
     }
 }
-
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
     if ([view conformsToProtocol:@protocol(JPSThumbnailAnnotationViewProtocol)]) {
         [((NSObject<JPSThumbnailAnnotationViewProtocol> *)view) didDeselectAnnotationViewInMap:mapView];
         
     }
 }
-
-
 @end

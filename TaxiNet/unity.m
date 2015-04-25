@@ -8,18 +8,38 @@
 
 #import "unity.h"
 
-#define URL_SIGNIN @"http://192.168.43.181:8080/TN/restServices/DriverController/Login"
-#define UPDATE_URL @"http://192.168.43.181:8080/TN/restServices/riderController/UpdateRider"
-#define NEAR_TAXI_URL @"http://192.168.43.181:8080/TN/restServices/DriverController/getNearDriver"
-#define FIND_PROMOTION_TRIP_URL @"http://localhost:8080/TN/restServices/PromotionTripController/FindPromotionTip"
-#define GETTRIP @"http://192.168.43.181:8080/TN/restServices/TripController/GetRequestForDriver"
-#define UPDATECURRENT @"http://192.168.43.181:8080/TN/restServices/DriverController/UpdateCurrentStatusiOS"
-#define UPDATETRIP @"http://192.168.43.181:8080/TN/restServices/TripController/UpdateTrip"
-#define LOGOUT @"http://192.168.43.181:8080/TN/restServices/DriverController/Logout"
-#define COMPLETETRIP @"http://192.168.43.181:8080/TN/restServices/TripController/CompleteTrip"
+#define URL_SIGNIN @"http://192.168.125.8:8080/TN/restServices/DriverController/LoginiOS"
+#define UPDATE_URL @"http://192.168.125.8:8080/TN/restServices/riderController/UpdateRideriOS"
+#define NEAR_TAXI_URL @"http://192.168.125.8:8080/TN/restServices/DriverController/getNearDriver"
+#define FIND_PROMOTION_TRIP_URL @"http://192.168.125.3:8080/TN/restServices/PromotionTripController/FindPromotionTip"
+#define GETTRIP @"http://192.168.125.8:8080/TN/restServices/TripController/GetRequestForDriveriOS"
+#define UPDATECURRENT @"http://192.168.125.8:8080/TN/restServices/DriverController/UpdateCurrentStatusiOS"
+#define UPDATETRIP @"http://192.168.125.8:8080/TN/restServices/TripController/UpdateTripiOS"
+#define LOGOUT @"http://192.168.125.8:8080/TN/restServices/DriverController/Logout"
+#define COMPLETETRIP @"http://192.168.125.8:8080/TN/restServices/TripController/CompleteTripiOS"
+#define LISTPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/GetListPromotionTripiOS"
+#define ADDPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/AddPromotionTripiOS"
 
 @implementation unity
-
++(void)GetListPromotionTrip: (NSString *)idDriver owner:(PromotionTripViewController *)owner
+{
+    UserInfo *mode=[[UserInfo alloc]init];
+    NSString *url=[NSString stringWithFormat:@"%@",LISTPROMOTIONTRIP];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params2 = @ {@"id":idDriver};
+    
+    [manager POST:url parameters:params2
+          success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         mode.ArrListPromiton=(NSArray *)responseObject;
+         owner.ArrListPromotion=mode.ArrListPromiton;
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"NewListPromotin" object:self];
+     }
+          failure:
+     ^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"failse");
+     }];
+}
 +(void)login_by_email : (NSString*)email pass:(NSString *)pass regId:(NSString*)regId deviceType:(NSString*)deviceType owner:(LoginViewController*)owner
 {
     UserInfo *model = [[UserInfo alloc] init];
@@ -168,10 +188,6 @@
               if ([status isEqualToString:@"PI"]) {
                   owner.pickRider=1;
               }
-//              else if ([status isEqualToString:@"PD"])
-//              {
-//                  owner.pickRider=2;
-//              }
               NSLog(@"success");
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -212,4 +228,20 @@
               
           }];
 }
++(void)AddPromotionTrip: (NSString *)base64
+{
+    NSString *url = [NSString stringWithFormat:@"%@",ADDPROMOTIONTRIP];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *param = @{@"json":base64};
+    [manager POST:url
+       parameters:param
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"success");
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"failse");
+              
+          }];
+}
+
 @end

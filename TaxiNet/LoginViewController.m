@@ -10,6 +10,7 @@
 #import "HomeViewController.h"
 #import "MBProgressHUD.h"
 #import "unity.h"
+#import "RegisterViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -48,32 +49,32 @@
 
 - (IBAction)Login:(id)sender {
     
-    if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
-        UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
-                                                         message:NSLocalizedString(@"please input username",nil)
-                                                        delegate:self
-                                               cancelButtonTitle:NSLocalizedString(@"OK",nil)
-                                               otherButtonTitles:nil, nil];
-        [alertTmp show];
-    }
-    else if (self.passLogin.text==nil|| [self.passLogin.text isEqualToString:@""])
-    {
-        UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
-                                                         message:NSLocalizedString(@"please input Password",nil)
-                                                        delegate:self
-                                               cancelButtonTitle:NSLocalizedString(@"OK",nil)
-                                               otherButtonTitles:nil, nil];
-        [alertTmp show];
-    }
-    else
-    {
-        NSString *deviceType = @"iOS";
-        [HUD show:YES];
-        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];        [unity login_by_email:self.emailLogin.text pass:self.passLogin.text regId:deviceToken deviceType:deviceType  owner:self];
-    }
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
-//    HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
-//    [self.navigationController pushViewController:controller animated:YES];
+//    if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
+//        UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+//                                                         message:NSLocalizedString(@"please input username",nil)
+//                                                        delegate:self
+//                                               cancelButtonTitle:NSLocalizedString(@"OK",nil)
+//                                               otherButtonTitles:nil, nil];
+//        [alertTmp show];
+//    }
+//    else if (self.passLogin.text==nil|| [self.passLogin.text isEqualToString:@""])
+//    {
+//        UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+//                                                         message:NSLocalizedString(@"please input Password",nil)
+//                                                        delegate:self
+//                                               cancelButtonTitle:NSLocalizedString(@"OK",nil)
+//                                               otherButtonTitles:nil, nil];
+//        [alertTmp show];
+//    }
+//    else
+//    {
+//        NSString *deviceType = @"iOS";
+//        [HUD show:YES];
+//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];        [unity login_by_email:self.emailLogin.text pass:self.passLogin.text regId:deviceToken deviceType:deviceType  owner:self];
+//    }
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
+    HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 -(void)checkLogin
 {
@@ -94,6 +95,12 @@
     appdelegate.tripinfo=self.dataTrip;
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
     HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+- (IBAction)Register:(id)sender {
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    RegisterViewController *controller = (RegisterViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"RegisterViewController"];
+    
     [self.navigationController pushViewController:controller animated:YES];
 }
 @end

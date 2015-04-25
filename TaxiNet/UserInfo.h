@@ -12,5 +12,6 @@
 @property (nonatomic,copy) NSDictionary *dataUser;
 @property (nonatomic,copy) NSDictionary *dataTrip;
 @property (nonatomic,copy) NSArray *neartaxi;
+@property (nonatomic,copy) NSArray *ArrListPromiton;
 
 @end

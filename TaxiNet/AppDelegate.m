@@ -87,7 +87,7 @@
 (NSDictionary *)userInfo {
     NSLog(@"push APNS: %@", userInfo);
     UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"APNS" message:@"You have request" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                               initWithTitle:@"Request Taxi" message:@"You have request" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [errorAlert show];
 
     self.RiderInfo=userInfo;

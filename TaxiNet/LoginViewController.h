@@ -28,6 +28,7 @@
 - (void)loginButton:(FBSDKLoginButton *)loginButton
 didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
               error:	(NSError *)error;
+- (IBAction)Register:(id)sender;
 
 - (void) loginButtonDidLogOut:(FBSDKLoginButton *)loginButton;
 -(void)checkTrip;
