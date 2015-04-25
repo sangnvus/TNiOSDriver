@@ -35,6 +35,7 @@
 		773F04531AEB72B600D9E69A /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 773F044E1AEB72B600D9E69A /* expandableImage.png */; };
 		773F04541AEB72B600D9E69A /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 773F044F1AEB72B600D9E69A /* expandableImage@2x.png */; };
 		773F04561AEB730E00D9E69A /* SKSTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773F04551AEB730E00D9E69A /* SKSTableViewCell.xib */; };
+		773F04611AEBC69600D9E69A /* InforRiderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773F04601AEBC69600D9E69A /* InforRiderViewController.m */; };
 		7741833D1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7741833C1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.m */; };
 		774318A11AA73DBA001CF128 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318A01AA73DBA001CF128 /* main.m */; };
 		774318A41AA73DBA001CF128 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318A31AA73DBA001CF128 /* AppDelegate.m */; };
@@ -173,6 +174,8 @@
 		773F044E1AEB72B600D9E69A /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expandableImage.png; sourceTree = "<group>"; };
 		773F044F1AEB72B600D9E69A /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "expandableImage@2x.png"; sourceTree = "<group>"; };
 		773F04551AEB730E00D9E69A /* SKSTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKSTableViewCell.xib; sourceTree = "<group>"; };
+		773F045F1AEBC69600D9E69A /* InforRiderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InforRiderViewController.h; sourceTree = "<group>"; };
+		773F04601AEBC69600D9E69A /* InforRiderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InforRiderViewController.m; sourceTree = "<group>"; };
 		7741833B1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		7741833C1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		7743189B1AA73DB9001CF128 /* taxinetDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taxinetDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -599,11 +602,13 @@
 		77F15CDD1AE8C61E004CB232 /* PromotionTrip */ = {
 			isa = PBXGroup;
 			children = (
+				77F15CE81AE909BA004CB232 /* SKTableview */,
 				773F04451AEB729000D9E69A /* PromotionTripViewController.h */,
 				773F04461AEB729000D9E69A /* PromotionTripViewController.m */,
 				773F04421AEB721A00D9E69A /* AddTripViewController.h */,
 				773F04431AEB721A00D9E69A /* AddTripViewController.m */,
-				77F15CE81AE909BA004CB232 /* SKTableview */,
+				773F045F1AEBC69600D9E69A /* InforRiderViewController.h */,
+				773F04601AEBC69600D9E69A /* InforRiderViewController.m */,
 			);
 			name = PromotionTrip;
 			sourceTree = "<group>";
@@ -814,6 +819,7 @@
 				774319011AAC415A001CF128 /* JPSThumnail.m in Sources */,
 				772BBE121ABF0EDA0098AB20 /* UIImageView+AFNetworking.m in Sources */,
 				776090D41AADD7F100C21D94 /* ProfileViewController.m in Sources */,
+				773F04611AEBC69600D9E69A /* InforRiderViewController.m in Sources */,
 				774318A11AA73DBA001CF128 /* main.m in Sources */,
 				774318D71AA747C1001CF128 /* LoginViewController.m in Sources */,
 				772BBE091ABF0EDA0098AB20 /* AFSecurityPolicy.m in Sources */,

@@ -26,7 +26,24 @@
     }
     return self;
 }
-
+-(void)setValueCell:(NSDictionary *)data
+{
+    self.timeDate.text=[data objectForKey:@"time"];
+    
+    NSArray *myArray = [[data objectForKey:@"fromAddress"] componentsSeparatedByString:@","];
+    self.adressFrom.text=[NSString stringWithFormat:@"From :%@,%@",[myArray objectAtIndex:0],[myArray objectAtIndex:1]];
+    NSArray *adressto = [[data objectForKey:@"toAddress"] componentsSeparatedByString:@","];
+    self.adressTo.text=[NSString stringWithFormat:@"To :%@,%@",[adressto objectAtIndex:0],[adressto objectAtIndex:1]];
+    
+    
+    if ([[data objectForKey:@"status"] isEqualToString:@"OP"]) {
+        self.status.text=@"Open";
+    }
+    else if ([[data objectForKey:@"status"] isEqualToString:@"CL"])
+    {
+        self.status.text=@"Close";
+    }
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];

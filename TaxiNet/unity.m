@@ -5,6 +5,11 @@
 //  Created by Louis Nhat on 3/22/15.
 //  Copyright (c) 2015 Louis Nhat. All rights reserved.
 //
+/*
+ NSArray *myArray = [[data objectForKey:@"fromAddress"] componentsSeparatedByString:@","];
+ NSMutableArray *mutableArray = [NSMutableArray array];
+ [mutableArray addObject:myArray];
+ */
 
 #import "unity.h"
 
@@ -19,8 +24,25 @@
 #define COMPLETETRIP @"http://192.168.125.8:8080/TN/restServices/TripController/CompleteTripiOS"
 #define LISTPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/GetListPromotionTripiOS"
 #define ADDPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/AddPromotionTripiOS"
-
+#define UPDATEPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
 @implementation unity
+
++(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status
+{
+    NSString *url=[NSString stringWithFormat:@"%@",UPDATEPROMOTIONTRIP];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params2 = @ {@"promotionTripId":promotionTripId,@"riderId":riderId,@"driverId":driverId,@"status":status};
+    
+    [manager POST:url parameters:params2
+          success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"success");
+     }
+          failure:
+     ^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"failse");
+     }];
+}
 +(void)GetListPromotionTrip: (NSString *)idDriver owner:(PromotionTripViewController *)owner
 {
     UserInfo *mode=[[UserInfo alloc]init];

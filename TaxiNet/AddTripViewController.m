@@ -339,6 +339,8 @@
         NSData *plainData = [data dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
         [unity AddPromotionTrip:base64String];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 - (IBAction)cancelPicker:(id)sender {

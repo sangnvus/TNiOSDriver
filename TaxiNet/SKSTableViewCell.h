@@ -18,6 +18,11 @@
 - (BOOL)containsIndicatorView;
 
 - (void)accessoryViewAnimation;
-@property (weak, nonatomic) IBOutlet UILabel *titlelabe;
+@property (weak, nonatomic) IBOutlet UILabel *status;
+@property (weak, nonatomic) IBOutlet UILabel *numberRider;
+@property (weak, nonatomic) IBOutlet UILabel *adressTo;
+@property (weak, nonatomic) IBOutlet UILabel *adressFrom;
+@property (weak, nonatomic) IBOutlet UILabel *timeDate;
+-(void)setValueCell:(NSDictionary *)data;
 
 @end

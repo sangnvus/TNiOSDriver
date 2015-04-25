@@ -32,5 +32,5 @@
 +(void)CompleteTrip:(NSString*)tripId cost:(NSString *)cost distance:(NSString *)distance owner: (HomeViewController*)owner;
 +(void)GetListPromotionTrip: (NSString *)idDriver owner:(PromotionTripViewController *)owner;
 +(void)AddPromotionTrip: (NSString *)base64;
-
++(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status;
 @end
