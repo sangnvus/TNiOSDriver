@@ -12,24 +12,24 @@
  */
 
 #import "unity.h"
-
-#define URL_SIGNIN @"http://192.168.125.8:8080/TN/restServices/DriverController/LoginiOS"
-#define UPDATE_URL @"http://192.168.125.8:8080/TN/restServices/riderController/UpdateRideriOS"
-#define NEAR_TAXI_URL @"http://192.168.125.8:8080/TN/restServices/DriverController/getNearDriver"
-#define FIND_PROMOTION_TRIP_URL @"http://192.168.125.3:8080/TN/restServices/PromotionTripController/FindPromotionTip"
-#define GETTRIP @"http://192.168.125.8:8080/TN/restServices/TripController/GetRequestForDriveriOS"
-#define UPDATECURRENT @"http://192.168.125.8:8080/TN/restServices/DriverController/UpdateCurrentStatusiOS"
-#define UPDATETRIP @"http://192.168.125.8:8080/TN/restServices/TripController/UpdateTripiOS"
-#define LOGOUT @"http://192.168.125.8:8080/TN/restServices/DriverController/Logout"
-#define COMPLETETRIP @"http://192.168.125.8:8080/TN/restServices/TripController/CompleteTripiOS"
-#define LISTPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/GetListPromotionTripiOS"
-#define ADDPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/AddPromotionTripiOS"
-#define UPDATEPROMOTIONTRIP @"http://192.168.125.8:8080/TN/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
+#define URL @"http://192.168.0.102:8080"
+#define URL_SIGNIN @"/TN/restServices/DriverController/LoginiOS"
+#define UPDATE_URL @"/TN/restServices/riderController/UpdateRideriOS"
+#define NEAR_TAXI_URL @"/TN/restServices/DriverController/getNearDriver"
+#define FIND_PROMOTION_TRIP_URL @"/TN/restServices/PromotionTripController/FindPromotionTip"
+#define GETTRIP @"/TN/restServices/TripController/GetRequestForDriveriOS"
+#define UPDATECURRENT @"/TN/restServices/DriverController/UpdateCurrentStatusiOS"
+#define UPDATETRIP @"/TN/restServices/TripController/UpdateTripiOS"
+#define LOGOUT @"/TN/restServices/DriverController/Logout"
+#define COMPLETETRIP @"/TN/restServices/TripController/CompleteTripiOS"
+#define LISTPROMOTIONTRIP @"/TN/restServices/PromotionTripController/GetListPromotionTripiOS"
+#define ADDPROMOTIONTRIP @"/TN/restServices/PromotionTripController/AddPromotionTripiOS"
+#define UPDATEPROMOTIONTRIP @"/TN/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
 @implementation unity
 
 +(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status
 {
-    NSString *url=[NSString stringWithFormat:@"%@",UPDATEPROMOTIONTRIP];
+    NSString *url=[NSString stringWithFormat:@"%@%@",URL,UPDATEPROMOTIONTRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params2 = @ {@"promotionTripId":promotionTripId,@"riderId":riderId,@"driverId":driverId,@"status":status};
     
@@ -46,7 +46,7 @@
 +(void)GetListPromotionTrip: (NSString *)idDriver owner:(PromotionTripViewController *)owner
 {
     UserInfo *mode=[[UserInfo alloc]init];
-    NSString *url=[NSString stringWithFormat:@"%@",LISTPROMOTIONTRIP];
+    NSString *url=[NSString stringWithFormat:@"%@%@",URL,LISTPROMOTIONTRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params2 = @ {@"id":idDriver};
     
@@ -66,7 +66,7 @@
 {
     UserInfo *model = [[UserInfo alloc] init];
     
-    NSString *url=[NSString stringWithFormat:@"%@",URL_SIGNIN];
+    NSString *url=[NSString stringWithFormat:@"%@%@",URL,URL_SIGNIN];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params2 = @ {@"username":email, @"password":pass,@"regId":regId, @"deviceType":deviceType};
     
@@ -83,7 +83,7 @@
           failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
          UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
-                                                          message:NSLocalizedString(@"please check info login",nil)
+                                                          message:NSLocalizedString(@"please check internet connection",nil)
                                                          delegate:self
                                                 cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                                 otherButtonTitles:nil, nil];
@@ -97,7 +97,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
-    NSString *api=[NSString stringWithFormat:@"http://192.168.125.10:8080/TN/restServices/CommonController/register?email=%@&password=%@&firstname=%@&lastname=%@&phone=%@&language=%@&usergroup=%@&countrycode=%@",email,pass,firstname,lastname,phone,language,usergroup,countrycode];
+    NSString *api=[NSString stringWithFormat:@"%@/TN/restServices/CommonController/register?email=%@&password=%@&firstname=%@&lastname=%@&phone=%@&language=%@&usergroup=%@&countrycode=%@",URL,email,pass,firstname,lastname,phone,language,usergroup,countrycode];
     NSLog(@"api:%@",api);
 
     [manager GET:api parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -109,7 +109,7 @@
 
 +(void)updateByRiderById:(NSString *)riderId firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email phoneNo:(NSString *)phoneNo
 {
-    NSString *url=[NSString stringWithFormat:@"%@",UPDATE_URL];
+    NSString *url=[NSString stringWithFormat:@"%@%@",URL,UPDATE_URL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params2 = @ {@"id":riderId, @"firstname":firstName, @"lastname":lastName, @"phoneNumber":phoneNo, @"email":email};
     [manager POST:url
@@ -131,7 +131,7 @@
 +(void)getNearTaxi:(NSString *)latitude andLongtitude:(NSString *)longtitude owner:(HomeViewController *)owner
 {
     UserInfo *model = [[UserInfo alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@",NEAR_TAXI_URL];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,NEAR_TAXI_URL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"latitude":latitude,@"longitude":longtitude};
     [manager POST:url
@@ -151,7 +151,7 @@
            withToLatitude:(NSString *)toLatitude
            andToLongitude:(NSString *)toLongitude
 {
-    NSString *url = [NSString stringWithFormat:@"%@",FIND_PROMOTION_TRIP_URL];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,FIND_PROMOTION_TRIP_URL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @ {@"fromLatitude":fromLongitude, @"fromLongitude":fromLongitude, @"toLatitude":toLatitude, @"toLongitude":toLongitude};
     [manager POST:url parameters:param
@@ -165,7 +165,7 @@
 +(void)getTrip:(NSString*)DriverID owner:(LoginViewController *)owner
 {
     UserInfo *model = [[UserInfo alloc] init];
-    NSString *url = [NSString stringWithFormat:@"%@",GETTRIP];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,GETTRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
     NSDictionary *param = @ {@"driverId":DriverID};
@@ -185,7 +185,7 @@
 }
 +(void)updateCurentStatus:(NSString*)base64
 {
-    NSString *url = [NSString stringWithFormat:@"%@",UPDATECURRENT];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,UPDATECURRENT];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"json":base64};
     [manager POST:url
@@ -200,7 +200,7 @@
 }
 +(void)updateTrip:(NSString*)RequestID userID:(NSString *)userID status:(NSString *)status owner : (HomeViewController *)owner
 {
-    NSString *url = [NSString stringWithFormat:@"%@",UPDATETRIP];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,UPDATETRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"requestId":RequestID,@"userId":userID,@"status":status};
     
@@ -209,6 +209,9 @@
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               if ([status isEqualToString:@"PI"]) {
                   owner.pickRider=1;
+              }
+              if ([status isEqualToString:@"PD"]) {
+                  owner.pickRider=2;
               }
               NSLog(@"success");
           }
@@ -219,7 +222,7 @@
 }
 +(void)LogOut:(NSString*)driverid
 {
-    NSString *url = [NSString stringWithFormat:@"%@",LOGOUT];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,LOGOUT];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"id":driverid};
     
@@ -233,16 +236,15 @@
               
           }];
 }
-+(void)CompleteTrip:(NSString*)tripId cost:(NSString *)cost distance:(NSString *)distance owner: (HomeViewController*)owner
++(void)CompleteTrip:(NSString*)tripId cost:(NSString *)cost distance:(NSString *)distance
 {
-    NSString *url = [NSString stringWithFormat:@"%@",COMPLETETRIP];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,COMPLETETRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"tripId":tripId,@"cost":cost,@"distance":distance};
     
     [manager POST:url
        parameters:param
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              owner.pickRider=0;
               NSLog(@"success");
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -252,7 +254,7 @@
 }
 +(void)AddPromotionTrip: (NSString *)base64
 {
-    NSString *url = [NSString stringWithFormat:@"%@",ADDPROMOTIONTRIP];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,ADDPROMOTIONTRIP];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *param = @{@"json":base64};
     [manager POST:url

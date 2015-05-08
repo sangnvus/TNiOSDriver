@@ -340,7 +340,7 @@
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
         [unity AddPromotionTrip:base64String];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 - (IBAction)cancelPicker:(id)sender {
@@ -389,5 +389,7 @@
 }
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
+
 }
 @end

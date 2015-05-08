@@ -7,29 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "AppDelegate.h"
 @interface LoginViewController : UIViewController
-- (IBAction)back:(id)sender;
 - (IBAction)Login:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *emailLogin;
 @property (weak, nonatomic) IBOutlet UITextField *passLogin;
-@property (weak, nonatomic) IBOutlet UIButton *FBLogin;
 @property (weak,nonatomic) NSDictionary *dataUser;
 @property (weak,nonatomic) NSDictionary *dataTrip;
 
 -(void)checkLogin;
 
-@property (strong, nonatomic) IBOutlet FBSDKLoginButton *FBButtonLoginTaxinet;
-
-- (IBAction)FBLoginBtn:(id)sender;
-
-- (void)loginButton:(FBSDKLoginButton *)loginButton
-didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
-              error:	(NSError *)error;
-- (IBAction)Register:(id)sender;
-
-- (void) loginButtonDidLogOut:(FBSDKLoginButton *)loginButton;
 -(void)checkTrip;
 @end

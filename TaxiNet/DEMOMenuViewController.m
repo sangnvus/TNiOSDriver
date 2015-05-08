@@ -13,7 +13,6 @@
 #import "AppDelegate.h"
 #import "ProfileViewController.h"
 #import "CompanyInfoViewController.h"
-#import "ViewController.h"
 #import "unity.h"
 #import "PromotionTripViewController.h"
 
@@ -113,7 +112,7 @@
     }
     else if (indexPath.row == 6)
     {
-        ViewController  *controller = (ViewController *)[mainStoryboard1 instantiateViewControllerWithIdentifier: @"ViewController"];
+        LoginViewController  *controller = (LoginViewController *)[mainStoryboard1 instantiateViewControllerWithIdentifier: @"LoginViewController"];
         [navigationController pushViewController:controller animated:YES];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
 //        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];

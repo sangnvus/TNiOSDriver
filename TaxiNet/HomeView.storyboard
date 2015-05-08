@@ -174,7 +174,8 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="45"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htn-rT-aOu">
-                                <rect key="frame" x="10" y="35" width="15" height="15"/>
+                                <rect key="frame" x="5" y="30" width="25" height="25"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" image="BarButton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -377,7 +378,8 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="45"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJW-zt-aZT">
-                                <rect key="frame" x="10" y="35" width="15" height="15"/>
+                                <rect key="frame" x="5" y="30" width="25" height="25"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" image="BarButton.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -471,8 +473,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uze-ZD-95K">
-                                <rect key="frame" x="16" y="28" width="46" height="30"/>
-                                <state key="normal" title="Back">
+                                <rect key="frame" x="13" y="31" width="22" height="14"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" backgroundImage="backwhile.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -592,8 +595,9 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="45"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMW-ep-wSQ">
-                                <rect key="frame" x="9" y="28" width="35" height="30"/>
-                                <state key="normal" title="Back">
+                                <rect key="frame" x="9" y="28" width="29" height="17"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" backgroundImage="backwhile.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -735,6 +739,9 @@
                                         <date key="date" timeIntervalSinceReferenceDate="451495698.53219998">
                                             <!--2015-04-23 15:28:18 +0000-->
                                         </date>
+                                        <date key="minimumDate" timeIntervalSinceReferenceDate="452624400">
+                                            <!--2015-05-06 17:00:00 +0000-->
+                                        </date>
                                         <date key="maximumDate" timeIntervalSinceReferenceDate="631105200">
                                             <!--2020-12-31 11:00:00 +0000-->
                                         </date>
@@ -834,8 +841,8 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="45"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZD-8A-duA">
-                                <rect key="frame" x="10" y="28" width="35" height="30"/>
-                                <state key="normal" title="Back">
+                                <rect key="frame" x="10" y="28" width="30" height="18"/>
+                                <state key="normal" backgroundImage="backwhile.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -875,12 +882,6 @@
                                             <action selector="reject:" destination="vuG-NV-sxS" eventType="touchUpInside" id="Cm5-bV-nfV"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rider Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXE-qx-GFJ">
-                                        <rect key="frame" x="108" y="7" width="131" height="21"/>
-                                        <fontDescription key="fontDescription" name="Marion-Regular" family="Marion" pointSize="18"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqh-rp-tyJ">
                                         <rect key="frame" x="11" y="40" width="293" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -968,6 +969,7 @@
         <image name="BarButton.png" width="24" height="34"/>
         <image name="BarLogin.png" width="1080" height="152"/>
         <image name="address.png" width="45" height="51"/>
+        <image name="backwhile.png" width="51" height="28"/>
         <image name="btn_regis.png" width="691" height="147"/>
         <image name="fromMap.png" width="128" height="128"/>
         <image name="iconlocation.png" width="46" height="46"/>

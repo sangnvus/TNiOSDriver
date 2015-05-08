@@ -10,7 +10,6 @@
 #import "HomeViewController.h"
 #import "MBProgressHUD.h"
 #import "unity.h"
-#import "RegisterViewController.h"
 @interface LoginViewController ()
 
 @end
@@ -83,24 +82,43 @@
 
     NSLog(@"data: %@",self.dataUser);
 
-    NSString * driverid=[self.dataUser objectForKey:@"id"];
-    [[NSUserDefaults standardUserDefaults] setObject:driverid forKey:@"idDriver"];
-    
-    [unity getTrip:driverid owner:self];
 
+    if ([self.dataUser objectForKey:@"message"] != [NSNull null]) {
+        if ([[self.dataUser objectForKey:@"message"] isEqualToString:@"1"]) {
+            UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                             message:NSLocalizedString(@"Acount not Exist",nil)
+                                                            delegate:self
+                                                   cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                   otherButtonTitles:nil, nil];
+            [alertTmp show];
+        }
+        else if ([[self.dataUser objectForKey:@"message"] isEqualToString:@"0"])
+        {
+            UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                             message:NSLocalizedString(@"Wrong PassWord",nil)
+                                                            delegate:self
+                                                   cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                   otherButtonTitles:nil, nil];
+            [alertTmp show];
+        }
+
+    }
+       else
+       {
+           NSString * driverid=[self.dataUser objectForKey:@"id"];
+           [[NSUserDefaults standardUserDefaults] setObject:driverid forKey:@"idDriver"];
+           [unity getTrip:driverid owner:self];
+
+       }
 }
 -(void)checkTrip
 {
     NSLog(@"datatrip:%@",self.dataTrip);
+
     appdelegate.tripinfo=self.dataTrip;
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
     HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (IBAction)Register:(id)sender {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    RegisterViewController *controller = (RegisterViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"RegisterViewController"];
-    
-    [self.navigationController pushViewController:controller animated:YES];
-}
+
 @end

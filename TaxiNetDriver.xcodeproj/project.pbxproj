@@ -40,7 +40,6 @@
 		774318A11AA73DBA001CF128 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318A01AA73DBA001CF128 /* main.m */; };
 		774318A41AA73DBA001CF128 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318A31AA73DBA001CF128 /* AppDelegate.m */; };
 		774318A71AA73DBA001CF128 /* TaxiNet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 774318A51AA73DBA001CF128 /* TaxiNet.xcdatamodeld */; };
-		774318AA1AA73DBA001CF128 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318A91AA73DBA001CF128 /* ViewController.m */; };
 		774318AD1AA73DBA001CF128 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774318AB1AA73DBA001CF128 /* Main.storyboard */; };
 		774318AF1AA73DBA001CF128 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 774318AE1AA73DBA001CF128 /* Images.xcassets */; };
 		774318B21AA73DBA001CF128 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 774318B01AA73DBA001CF128 /* LaunchScreen.xib */; };
@@ -48,14 +47,12 @@
 		774318CE1AA7465A001CF128 /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318CB1AA7465A001CF128 /* btn_login.png */; };
 		774318CF1AA7465A001CF128 /* btn_regis.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318CC1AA7465A001CF128 /* btn_regis.png */; };
 		774318D01AA7465A001CF128 /* splast.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318CD1AA7465A001CF128 /* splast.png */; };
-		774318D41AA74794001CF128 /* AppLogin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774318D31AA74794001CF128 /* AppLogin.storyboard */; };
 		774318D71AA747C1001CF128 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318D61AA747C1001CF128 /* LoginViewController.m */; };
 		774318DB1AA74DAE001CF128 /* Button_fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318D81AA74DAE001CF128 /* Button_fb.png */; };
 		774318DC1AA74DAE001CF128 /* text_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318D91AA74DAE001CF128 /* text_email.png */; };
 		774318DD1AA74DAE001CF128 /* text_pass.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318DA1AA74DAE001CF128 /* text_pass.png */; };
 		774318E01AA750BD001CF128 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318DF1AA750BD001CF128 /* NavigationController.m */; };
 		774318E51AA75604001CF128 /* backgro_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318E41AA75604001CF128 /* backgro_login.png */; };
-		774318E81AA7564D001CF128 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 774318E71AA7564D001CF128 /* RegisterViewController.m */; };
 		774318EC1AA96029001CF128 /* checkbox_non.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318E91AA96029001CF128 /* checkbox_non.png */; };
 		774318ED1AA96029001CF128 /* checkBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318EA1AA96029001CF128 /* checkBox.png */; };
 		774318EE1AA96029001CF128 /* user_register.png in Resources */ = {isa = PBXBuildFile; fileRef = 774318EB1AA96029001CF128 /* user_register.png */; };
@@ -100,10 +97,12 @@
 		77F15CDC1AE84FDA004CB232 /* phonetext.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F15CDB1AE84FDA004CB232 /* phonetext.png */; };
 		77F15CF11AE909D0004CB232 /* expandableImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F15CE91AE909D0004CB232 /* expandableImage.png */; };
 		77F15CF21AE909D0004CB232 /* expandableImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F15CEA1AE909D0004CB232 /* expandableImage@2x.png */; };
+		77FDA4811AED180D00AECADE /* backwhile.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FDA4801AED180D00AECADE /* backwhile.png */; };
+		77FDA4861AED32B400AECADE /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FDA4841AED32B400AECADE /* PaymentViewController.m */; };
+		77FDA4871AED32B400AECADE /* PaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77FDA4851AED32B400AECADE /* PaymentViewController.xib */; };
+		77FDA4891AED410F00AECADE /* text_input.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FDA4881AED410F00AECADE /* text_input.png */; };
 		8F025F2F1ADC28DB0044087F /* yourlogohere.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F025F2E1ADC28DB0044087F /* yourlogohere.png */; };
 		8F3DC47F1AD97FC9009A2FEF /* ChangeAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3DC47E1AD97FC9009A2FEF /* ChangeAddressViewController.m */; };
-		8F9D13B31ADD56AD00EE8AB4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9D13B11ADD56AD00EE8AB4 /* FBSDKCoreKit.framework */; };
-		8F9D13B41ADD56AD00EE8AB4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9D13B21ADD56AD00EE8AB4 /* FBSDKLoginKit.framework */; };
 		8F9D13B71ADD5FDC00EE8AB4 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9D13B51ADD5FDC00EE8AB4 /* like.png */; };
 		8F9D13B81ADD5FDC00EE8AB4 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9D13B61ADD5FDC00EE8AB4 /* star.png */; };
 /* End PBXBuildFile section */
@@ -184,8 +183,6 @@
 		774318A21AA73DBA001CF128 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		774318A31AA73DBA001CF128 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		774318A61AA73DBA001CF128 /* TaxiNet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaxiNet.xcdatamodel; sourceTree = "<group>"; };
-		774318A81AA73DBA001CF128 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		774318A91AA73DBA001CF128 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		774318AC1AA73DBA001CF128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		774318AE1AA73DBA001CF128 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		774318B11AA73DBA001CF128 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -195,7 +192,6 @@
 		774318CB1AA7465A001CF128 /* btn_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login.png; sourceTree = "<group>"; };
 		774318CC1AA7465A001CF128 /* btn_regis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_regis.png; sourceTree = "<group>"; };
 		774318CD1AA7465A001CF128 /* splast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splast.png; sourceTree = "<group>"; };
-		774318D31AA74794001CF128 /* AppLogin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AppLogin.storyboard; sourceTree = "<group>"; };
 		774318D51AA747C1001CF128 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		774318D61AA747C1001CF128 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		774318D81AA74DAE001CF128 /* Button_fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_fb.png; sourceTree = "<group>"; };
@@ -204,8 +200,6 @@
 		774318DE1AA750BD001CF128 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		774318DF1AA750BD001CF128 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		774318E41AA75604001CF128 /* backgro_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgro_login.png; sourceTree = "<group>"; };
-		774318E61AA7564D001CF128 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
-		774318E71AA7564D001CF128 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		774318E91AA96029001CF128 /* checkbox_non.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkbox_non.png; sourceTree = "<group>"; };
 		774318EA1AA96029001CF128 /* checkBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkBox.png; sourceTree = "<group>"; };
 		774318EB1AA96029001CF128 /* user_register.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_register.png; sourceTree = "<group>"; };
@@ -264,6 +258,11 @@
 		77F15CDB1AE84FDA004CB232 /* phonetext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phonetext.png; sourceTree = "<group>"; };
 		77F15CE91AE909D0004CB232 /* expandableImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = expandableImage.png; path = ../SKSTableView/expandableImage.png; sourceTree = "<group>"; };
 		77F15CEA1AE909D0004CB232 /* expandableImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "expandableImage@2x.png"; path = "../SKSTableView/expandableImage@2x.png"; sourceTree = "<group>"; };
+		77FDA4801AED180D00AECADE /* backwhile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backwhile.png; sourceTree = "<group>"; };
+		77FDA4831AED32B400AECADE /* PaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewController.h; sourceTree = "<group>"; };
+		77FDA4841AED32B400AECADE /* PaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
+		77FDA4851AED32B400AECADE /* PaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentViewController.xib; sourceTree = "<group>"; };
+		77FDA4881AED410F00AECADE /* text_input.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_input.png; sourceTree = "<group>"; };
 		8F025F2E1ADC28DB0044087F /* yourlogohere.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yourlogohere.png; sourceTree = "<group>"; };
 		8F3DC47D1AD97FC9009A2FEF /* ChangeAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeAddressViewController.h; sourceTree = "<group>"; };
 		8F3DC47E1AD97FC9009A2FEF /* ChangeAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeAddressViewController.m; sourceTree = "<group>"; };
@@ -272,8 +271,6 @@
 		8F3DC4831AD98F46009A2FEF /* calender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = calender.png; path = ../../../../../../Desktop/picTN/calender.png; sourceTree = "<group>"; };
 		8F3DC4841AD98F46009A2FEF /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact.png; path = ../../../../../../Desktop/picTN/contact.png; sourceTree = "<group>"; };
 		8F3DC48D1AD99881009A2FEF /* iconlocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconlocation.png; path = ../../../../../../Desktop/picTN/iconlocation.png; sourceTree = "<group>"; };
-		8F9D13B11ADD56AD00EE8AB4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = TaxiNet/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		8F9D13B21ADD56AD00EE8AB4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = TaxiNet/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		8F9D13B51ADD5FDC00EE8AB4 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		8F9D13B61ADD5FDC00EE8AB4 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -283,8 +280,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F9D13B31ADD56AD00EE8AB4 /* FBSDKCoreKit.framework in Frameworks */,
-				8F9D13B41ADD56AD00EE8AB4 /* FBSDKLoginKit.framework in Frameworks */,
 				776090B71AAD81F300C21D94 /* CoreGraphics.framework in Frameworks */,
 				776090B51AAD81E600C21D94 /* Foundation.framework in Frameworks */,
 				776090B31AAD81DD00C21D94 /* UIKit.framework in Frameworks */,
@@ -456,6 +451,8 @@
 		774318C81AA74568001CF128 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				77FDA4881AED410F00AECADE /* text_input.png */,
+				77FDA4801AED180D00AECADE /* backwhile.png */,
 				77F15CE91AE909D0004CB232 /* expandableImage.png */,
 				77F15CEA1AE909D0004CB232 /* expandableImage@2x.png */,
 				77F15CDB1AE84FDA004CB232 /* phonetext.png */,
@@ -503,8 +500,6 @@
 				774318DF1AA750BD001CF128 /* NavigationController.m */,
 				774318A21AA73DBA001CF128 /* AppDelegate.h */,
 				774318A31AA73DBA001CF128 /* AppDelegate.m */,
-				774318A81AA73DBA001CF128 /* ViewController.h */,
-				774318A91AA73DBA001CF128 /* ViewController.m */,
 				774318AB1AA73DBA001CF128 /* Main.storyboard */,
 			);
 			name = AppMain;
@@ -513,9 +508,6 @@
 		774318D21AA7476C001CF128 /* AppLogin */ = {
 			isa = PBXGroup;
 			children = (
-				774318D31AA74794001CF128 /* AppLogin.storyboard */,
-				774318E61AA7564D001CF128 /* RegisterViewController.h */,
-				774318E71AA7564D001CF128 /* RegisterViewController.m */,
 				774318D51AA747C1001CF128 /* LoginViewController.h */,
 				774318D61AA747C1001CF128 /* LoginViewController.m */,
 			);
@@ -525,6 +517,7 @@
 		774318F11AA96359001CF128 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				77FDA4821AED2D0B00AECADE /* Payment */,
 				77F15CDD1AE8C61E004CB232 /* PromotionTrip */,
 				774318F21AA9636A001CF128 /* HomeView.storyboard */,
 				774318F41AA9637D001CF128 /* HomeViewController.h */,
@@ -568,8 +561,6 @@
 		776090B81AAD864500C21D94 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				8F9D13B11ADD56AD00EE8AB4 /* FBSDKCoreKit.framework */,
-				8F9D13B21ADD56AD00EE8AB4 /* FBSDKLoginKit.framework */,
 				776090B61AAD81F300C21D94 /* CoreGraphics.framework */,
 				776090B41AAD81E600C21D94 /* Foundation.framework */,
 				776090B21AAD81DD00C21D94 /* UIKit.framework */,
@@ -627,6 +618,16 @@
 				773F04551AEB730E00D9E69A /* SKSTableViewCell.xib */,
 			);
 			name = SKTableview;
+			sourceTree = "<group>";
+		};
+		77FDA4821AED2D0B00AECADE /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				77FDA4831AED32B400AECADE /* PaymentViewController.h */,
+				77FDA4841AED32B400AECADE /* PaymentViewController.m */,
+				77FDA4851AED32B400AECADE /* PaymentViewController.xib */,
+			);
+			name = Payment;
 			sourceTree = "<group>";
 		};
 		8F3DC4801AD98F27009A2FEF /* icon */ = {
@@ -737,6 +738,7 @@
 				775B5F651ADE33EB00765F4F /* locatorTaxi.png in Resources */,
 				774318CE1AA7465A001CF128 /* btn_login.png in Resources */,
 				775B5F771AE02BF100765F4F /* button_find.png in Resources */,
+				77FDA4891AED410F00AECADE /* text_input.png in Resources */,
 				775B5F691ADEDA3C00765F4F /* toMap.png in Resources */,
 				7772F4461AD7CFCD00467247 /* to.png in Resources */,
 				774318E51AA75604001CF128 /* backgro_login.png in Resources */,
@@ -748,11 +750,12 @@
 				774318EC1AA96029001CF128 /* checkbox_non.png in Resources */,
 				774318D01AA7465A001CF128 /* splast.png in Resources */,
 				774318DB1AA74DAE001CF128 /* Button_fb.png in Resources */,
+				77FDA4871AED32B400AECADE /* PaymentViewController.xib in Resources */,
 				774318CF1AA7465A001CF128 /* btn_regis.png in Resources */,
-				774318D41AA74794001CF128 /* AppLogin.storyboard in Resources */,
 				774318DD1AA74DAE001CF128 /* text_pass.png in Resources */,
 				77F15CF21AE909D0004CB232 /* expandableImage@2x.png in Resources */,
 				773F04541AEB72B600D9E69A /* expandableImage@2x.png in Resources */,
+				77FDA4811AED180D00AECADE /* backwhile.png in Resources */,
 				774318F01AA961C4001CF128 /* Back.png in Resources */,
 				775B5F701ADEE00E00765F4F /* mapfrom.png in Resources */,
 				8F9D13B81ADD5FDC00EE8AB4 /* star.png in Resources */,
@@ -788,7 +791,6 @@
 				774318A41AA73DBA001CF128 /* AppDelegate.m in Sources */,
 				773F04501AEB72B600D9E69A /* SKSTableView.m in Sources */,
 				7741833D1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.m in Sources */,
-				774318AA1AA73DBA001CF128 /* ViewController.m in Sources */,
 				772BBE131ABF0EDA0098AB20 /* UIProgressView+AFNetworking.m in Sources */,
 				776090C71AADD59C00C21D94 /* REFrostedContainerViewController.m in Sources */,
 				772BBE0A1ABF0EDA0098AB20 /* AFURLConnectionOperation.m in Sources */,
@@ -799,8 +801,8 @@
 				776090C91AADD59C00C21D94 /* UIImage+REFrostedViewController.m in Sources */,
 				773F04511AEB72B600D9E69A /* SKSTableViewCell.m in Sources */,
 				774318E01AA750BD001CF128 /* NavigationController.m in Sources */,
+				77FDA4861AED32B400AECADE /* PaymentViewController.m in Sources */,
 				774318FF1AAC415A001CF128 /* JPSThumbnailAnnotation.m in Sources */,
-				774318E81AA7564D001CF128 /* RegisterViewController.m in Sources */,
 				772BBE0E1ABF0EDA0098AB20 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				772BBE051ABF0EDA0098AB20 /* AFHTTPRequestOperation.m in Sources */,
 				776090CA1AADD59C00C21D94 /* UIView+REFrostedViewController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "REFrostedViewController.h"
+#import "PaymentViewController.h"
 @interface HomeViewController () {
     CLLocationCoordinate2D coordinateFrom;
     CLLocationCoordinate2D coordinateTo;
@@ -74,7 +75,6 @@
         UIAlertView *errorAlert = [[UIAlertView alloc]
                                    initWithTitle:@"APNS" message:@"You have request" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorAlert show];
-        NSLog(@"app delegate:%@",appdelegate.tripinfo);
         TripDetail =appdelegate.tripinfo;
         [self showTrip];
         [UIView beginAnimations:@"animateAddContentView" context:nil];
@@ -142,8 +142,8 @@
     self.riderFrom.text=adressFrom;
     self.riderTo.text=adressTo;
     
-    NSString *latitu=[rider objectForKey:@"startLatitude"];
-    NSString *lontitu=[rider objectForKey:@"startLongitude"];
+    NSString *latitu=[TripDetail objectForKey:@"startLatitude"];
+    NSString *lontitu=[TripDetail objectForKey:@"startLongitude"];
     coordinateTo.latitude=[latitu doubleValue];
     coordinateTo.longitude=[lontitu doubleValue];
     placeFrom = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake([latitu doubleValue], [lontitu doubleValue]) addressDictionary:nil];
@@ -226,20 +226,31 @@
     NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
     NSLog(@"request id : %@ driver id : %@",requestid,idDriver);
     if (pickRider==0) {
+        //acept
         [unity updateTrip:requestid userID:idDriver status:@"PI" owner:self];
         [self.btnAcept setTitle:@"Picked" forState:UIControlStateNormal];
     }
     if (pickRider==1) {
+        //picking
         [self.btnAcept setTitle:@"Complete" forState:UIControlStateNormal];
         [unity updateTrip:requestid userID:idDriver status:@"PD" owner:self];
-        UIAlertView *Alert = [[UIAlertView alloc]
-                                   initWithTitle:@"Cost" message:@"You have 3000d" delegate:self
-                                   cancelButtonTitle:@"OK"
-                                   otherButtonTitles:nil];
-        Alert.tag = 1;
-        [Alert show];
-        [unity updateTrip:requestid userID:idDriver status:@"PD" owner:self];
+    }
+    if (pickRider==2) {
+        //pickked
+        [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
+//        [unity updateTrip:requestid userID:idDriver status:@"TC" owner:self];
+        NSDictionary *rider=[TripDetail objectForKey:@"rider"];
+        NSString *name=[NSString stringWithFormat:@"%@ %@",[rider objectForKey:@"firstName"],[rider objectForKey:@"lastName"]];
+        NSString *phone=[rider objectForKey:@"phone"];
 
+        PaymentViewController *payment = [[PaymentViewController alloc] initWithNibName:@"PaymentViewController" bundle:nil];
+        payment.vcParent = self;
+        payment.nameRider.text=name;
+        payment.phone=phone;
+        [self presentPopupViewController:payment animated:YES completion:^(void) {
+            NSLog(@"popup view presented");
+        }];
+        
         [self.mapview removeOverlays:self.mapview.overlays];
         NSInteger toRemoveCount = mapview.annotations.count;
         NSMutableArray *toRemove = [NSMutableArray arrayWithCapacity:toRemoveCount];
@@ -247,19 +258,12 @@
             if (annotation != mapview.userLocation)
                 [toRemove addObject:annotation];
         [mapview removeAnnotations:toRemove];
+        self.ViewDetail.hidden=YES;
+        pickRider=0;
+
     }
 }
-- (void)alertView:(UIAlertView *)alertView
-clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag==1) {
-        if (buttonIndex == [alertView cancelButtonIndex]){
-            NSString* requestid = [[NSUserDefaults standardUserDefaults] stringForKey:@"requestID"];
-            [unity CompleteTrip:requestid cost:@"5000" distance:@"123" owner:self];
-            [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
-            self.ViewDetail.hidden=YES;
-        }
-    }
-}
+
 - (IBAction)Cancel:(id)sender {
     NSString* requestid = [[NSUserDefaults standardUserDefaults] stringForKey:@"requestID"];
     NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
