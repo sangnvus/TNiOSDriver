@@ -23,8 +23,6 @@
                  lastName:(NSString*)lastName
                     email:(NSString*)email
                   phoneNo:(NSString*)phoneNo;
-+(void)getNearTaxi:(NSString*)latitude
-     andLongtitude:(NSString*)longtitude owner:(HomeViewController *)owner;
 +(void)getTrip:(NSString*)DriverID owner:(LoginViewController *)owner;
 +(void)updateCurentStatus:(NSString*)base64;
 +(void)updateTrip:(NSString*)RequestID userID:(NSString *)userID status:(NSString *)status owner : (HomeViewController *)owner;

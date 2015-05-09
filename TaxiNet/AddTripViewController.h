@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "JPSThumbnailAnnotation.h"
 
-@interface AddTripViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface AddTripViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *mImageFocus;
 @property (weak, nonatomic) IBOutlet MKMapView *mapview;
 @property (weak, nonatomic) IBOutlet UILabel *txtAdressFrom;
@@ -33,5 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewPickerSheet;
 - (IBAction)Back:(id)sender;
+@property (weak, nonatomic) IBOutlet UISearchBar *mSearchBar;
+@property (nonatomic, assign) MKCoordinateRegion boundingRegion;
+@property (weak, nonatomic) IBOutlet UIView *ViewtabBar;
 
 @end

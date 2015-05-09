@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *riderTo;
 - (IBAction)Acept:(id)sender;
 - (IBAction)Cancel:(id)sender;
-- (IBAction)show:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
 @property (weak, nonatomic) IBOutlet UIView *boder0;
 @property (weak, nonatomic) IBOutlet UIView *boder1;
@@ -36,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIView *boder4;
 @property (weak, nonatomic) IBOutlet UIButton *btnAcept;
 @property (nonatomic, assign) NSInteger  pickRider;
+- (IBAction)setMylocation:(id)sender;
 
 - (void)findWay;
--(void)checkGetnearTaxi;
 @end

@@ -8,7 +8,9 @@
 
 #import "AddTripViewController.h"
 #import "unity.h"
+#import "HomeViewController.h"
 @interface AddTripViewController ()
+@property (nonatomic, strong) MKLocalSearch *localSearch;
 
 @end
 
@@ -21,7 +23,9 @@
     CLLocationCoordinate2D coordinateTo;
     NSArray *numbershet;
     BOOL saveLocation;
-
+    UITableView *mTableViewSuggest;
+    NSMutableArray *arrDataSearched;
+    UIView *background;
 }
 @synthesize viewDetailFrom,viewDetailTo,mImageFocus,mapview,viewDetailSheet,viewDetailTime;
 
@@ -29,10 +33,27 @@
     [super viewDidLoad];
     fromselect=FALSE;
     saveLocation=FALSE;
+    
+    self.mSearchBar.delegate = self;
+    arrDataSearched = [[NSMutableArray alloc] init];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    mTableViewSuggest = [[UITableView alloc] initWithFrame:CGRectMake(0, self.mSearchBar.frame.origin.y + self.mSearchBar.frame.size.height+45, screenWidth,0)];
+    mTableViewSuggest.delegate = self;
+    mTableViewSuggest.dataSource = self;
+    
+    [mTableViewSuggest setHidden:YES];
+    mTableViewSuggest.backgroundColor =[UIColor whiteColor];
+    background=[[UIView alloc] initWithFrame: CGRectMake ( 0, 65, 320, 500)];
+    background.backgroundColor =[UIColor colorWithRed:.1 green:.1 blue:.1 alpha: .4];
+    [self.view addSubview:background];
+    [self.view addSubview:mTableViewSuggest];
+    
+    background.hidden=YES;
     // Do any additional setup after loading the view.
     mImageFocus.layer.anchorPoint = CGPointMake(0.5, 1.0);
     mapview.delegate = self;
-//    mImageFocus.hidden=YES;
+    //    mImageFocus.hidden=YES;
     [self performSelector:@selector(zoomInToMyLocation)
                withObject:nil
                afterDelay:1];
@@ -65,12 +86,157 @@
     
     self.DatePicker.date = [NSDate date];
     numbershet  = [[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6" , nil];
-
+    
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [arrDataSearched count];;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellIdentifier = @"CellIdentifier";
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+    
+    cell.backgroundColor = [UIColor clearColor];
+    
+    MKMapItem *entity = [arrDataSearched objectAtIndex:indexPath.row];
+    cell.textLabel.text = entity.placemark.title;
+    cell.textLabel.textColor = [UIColor blackColor];
+    
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MKMapItem *mapItem = [arrDataSearched objectAtIndex:indexPath.row];
+    self.mapview.centerCoordinate = mapItem.placemark.coordinate;
+    [UIView beginAnimations:@"animateAddContentView" context:nil];
+    [UIView setAnimationDuration:0.4];
+    CGRect frame=self.ViewtabBar.frame;
+    frame.origin.y=0;
+    self.ViewtabBar.frame=frame;
+    [UIView commitAnimations];
+    background.hidden=YES;
+    [mTableViewSuggest setBounds:CGRectMake(0,
+                                            self.mSearchBar.frame.origin.y + self.mSearchBar.frame.size.height,320,0)];
+    [self.view endEditing:YES];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    [searchBar resignFirstResponder];
+    [UIView beginAnimations:@"animateAddContentView" context:nil];
+    [UIView setAnimationDuration:0.4];
+    CGRect frame=self.ViewtabBar.frame;
+    frame.origin.y=0;
+    self.ViewtabBar.frame=frame;
+    [UIView commitAnimations];
+    background.hidden=YES;
+    [mTableViewSuggest setBounds:CGRectMake(0,
+                                            self.mSearchBar.frame.origin.y + self.mSearchBar.frame.size.height,320,0)];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.4;
+    [mTableViewSuggest.layer addAnimation:animation forKey:nil];
+    [mTableViewSuggest setHidden:NO];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+    CATransition *animation = [CATransition animation];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.4;
+    [mTableViewSuggest.layer addAnimation:animation forKey:nil];
+    [mTableViewSuggest setHidden:YES];
+    [arrDataSearched removeAllObjects];
+    
+    [mTableViewSuggest reloadData];
+    
+    searchBar.text = @"";
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [arrDataSearched removeAllObjects];
+    
+    if (searchText ==NULL || [searchText isEqualToString:@""]) {
+        
+    }
+    else{
+        if (self.localSearch.searching)
+        {
+            [self.localSearch cancel];
+        }
+        MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+        
+        request.naturalLanguageQuery = searchText;
+        MKCoordinateRegion newRegion;
+        NSString* longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
+        NSString* latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+        newRegion.center.latitude = [latitude doubleValue];
+        newRegion.center.longitude = [longitude doubleValue];
+        newRegion.span.latitudeDelta = 0.112872;
+        newRegion.span.longitudeDelta = 0.109863;
+        request.region = newRegion;
+        MKLocalSearchCompletionHandler completionHandler = ^(MKLocalSearchResponse *response, NSError *error)
+        {
+            if (error != nil)
+            {
+                NSString *errorStr = [[error userInfo] valueForKey:NSLocalizedDescriptionKey];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Could not find places"
+                                                                message:errorStr
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            }
+            else
+            {
+                [arrDataSearched addObjectsFromArray:[response mapItems]];
+                
+                CGRect bounds = [mTableViewSuggest bounds];
+                self.boundingRegion = response.boundingRegion;
+                [mTableViewSuggest setBounds:CGRectMake(bounds.origin.x,
+                                                        self.mSearchBar.frame.origin.y + self.mSearchBar.frame.size.height,
+                                                        bounds.size.width,
+                                                        250)];
+                CGRect frame=mTableViewSuggest.frame;
+                frame.origin.y=70;
+                mTableViewSuggest.frame=frame;
+                if (arrDataSearched.count==0) {
+                    mTableViewSuggest.hidden=YES;
+                }
+                else
+                    mTableViewSuggest.hidden=NO;
+                [mTableViewSuggest reloadData];
+            }
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        };
+        if (self.localSearch != nil)
+        {
+            self.localSearch = nil;
+        }
+        self.localSearch = [[MKLocalSearch alloc] initWithRequest:request];
+        
+        [self.localSearch startWithCompletionHandler:completionHandler];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    }
+    
+    
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
-    
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
@@ -104,14 +270,8 @@
     [mImageFocus setImage:[UIImage imageNamed:@"fromMap.png"]];
     NSString *longitudeFrom,*latitudeFrom;
     if (fromselect==TRUE) {
-        if (saveLocation==FALSE) {
-            longitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
-            latitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
-        }
-        else{
-            longitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeFromTrip"];
-            latitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeFromTrip"];
-        }
+        longitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeFromTrip"];
+        latitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeFromTrip"];
         MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
         region.center.latitude = [latitudeFrom floatValue] ;
         region.center.longitude = [longitudeFrom floatValue];
@@ -126,11 +286,11 @@
             if (annotation != mapview.userLocation)
                 [toRemove addObject:annotation];
         [mapview removeAnnotations:toRemove];
-        JPSThumbnail *annotation = [[JPSThumbnail alloc] init];
-        annotation.coordinate = CLLocationCoordinate2DMake([latitudeFrom floatValue], [longitudeFrom floatValue]);
-        annotation.image = [UIImage imageNamed:@"fromMap.png"];
-        
-        [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotation]];
+//        JPSThumbnail *annotation = [[JPSThumbnail alloc] init];
+//        annotation.coordinate = CLLocationCoordinate2DMake([latitudeFrom floatValue], [longitudeFrom floatValue]);
+//        annotation.image = [UIImage imageNamed:@"fromMap.png"];
+//        
+//        [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotation]];
         
         NSString *longitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeToTrip"];
         NSString *latitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeToTrip"];
@@ -138,6 +298,7 @@
         annotationTo.coordinate = CLLocationCoordinate2DMake([latitudeTo floatValue], [longitudeTo floatValue]);
         annotationTo.image = [UIImage imageNamed:@"toMap.png"];
         [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotationTo]];
+        
     }
     
 }
@@ -145,14 +306,14 @@
     [mImageFocus setImage:[UIImage imageNamed:@"toMap.png"]];
     fromselect=TRUE;
     NSString *longitudeTo,*latitudeTo;
-        if (saveLocation==FALSE) {
-            longitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeTo"];
-            latitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeTo"];
-        }
-        else{
-            longitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeToTrip"];
-            latitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeToTrip"];
-        }
+    if (saveLocation==FALSE) {
+        longitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeTo"];
+        latitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeTo"];
+    }
+    else{
+        longitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeToTrip"];
+        latitudeTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeToTrip"];
+    }
     MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
     region.center.latitude = [latitudeTo floatValue] ;
     region.center.longitude = [longitudeTo floatValue];
@@ -167,10 +328,10 @@
         if (annotation != mapview.userLocation)
             [toRemove addObject:annotation];
     [mapview removeAnnotations:toRemove];
-    JPSThumbnail *annotationTo = [[JPSThumbnail alloc] init];
-    annotationTo.coordinate = CLLocationCoordinate2DMake([latitudeTo floatValue], [longitudeTo floatValue]);
-    annotationTo.image = [UIImage imageNamed:@"toMap.png"];
-    [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotationTo]];
+//    JPSThumbnail *annotationTo = [[JPSThumbnail alloc] init];
+//    annotationTo.coordinate = CLLocationCoordinate2DMake([latitudeTo floatValue], [longitudeTo floatValue]);
+//    annotationTo.image = [UIImage imageNamed:@"toMap.png"];
+//    [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotationTo]];
     
     
     NSString *longitudeFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeFromTrip"];
@@ -179,6 +340,7 @@
     annotation.coordinate = CLLocationCoordinate2DMake([latitudeFrom floatValue], [longitudeFrom floatValue]);
     annotation.image = [UIImage imageNamed:@"fromMap.png"];
     [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotation]];
+    saveLocation=TRUE;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -218,40 +380,47 @@
          {
              NSString *address = @"";
              NSString *city = @"";
-             CLPlacemark *placemark = placemarks[0];
+             NSString *nameStreet = @"";
              
+             CLPlacemark *placemark = placemarks[0];
              if([placemark.addressDictionary objectForKey:@"FormattedAddressLines"] != NULL) {
                  address = [[placemark.addressDictionary objectForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
              } else {
-                 address = @"Address Not founded";
+                 address = @"Address Not Founded";
              }
-             if ([placemark.addressDictionary objectForKey:@"SubAdministrativeArea"] != NULL)
-                 city = [placemark.addressDictionary objectForKey:@"SubAdministrativeArea"];
-             else if([placemark.addressDictionary objectForKey:@"City"] != NULL)
+             if([placemark.addressDictionary objectForKey:@"Name"] != NULL) {
+                 nameStreet = [placemark.addressDictionary objectForKey:@"Name"];
+             } else {
+                 nameStreet = @"Address Not Founded";
+             }
+             if ([placemark.addressDictionary objectForKey:@"City"] != NULL)
                  city = [placemark.addressDictionary objectForKey:@"City"];
-             else if([placemark.addressDictionary objectForKey:@"Country"] != NULL)
-                 city = [placemark.addressDictionary objectForKey:@"Country"];
              else
-                 city = @"City Not founded";
-             
-             if (locationTabPosition == 0) {
-                 self.txtAdressFrom.text = address;
-                 [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"adressFromTrip"];
-                 if ([address length]>30) {
-                     self.txtAdressFrom.text=[address substringToIndex:[address length] - 27];
-                     [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"adressFromTrip"];
+             {
+                 NSArray *myArrayAdress = [address componentsSeparatedByString:@","];
+                 if (myArrayAdress.count==2) {
+                     city=[NSString stringWithFormat:@"%@",[myArrayAdress objectAtIndex:0]];
                  }
+                 else if (myArrayAdress.count==3)
+                 {
+                     city=[NSString stringWithFormat:@"%@",[myArrayAdress objectAtIndex:1]];
+                 }
+                 else if (myArrayAdress.count==4)
+                 {
+                     city=[NSString stringWithFormat:@"%@",[myArrayAdress objectAtIndex:2]];
+                 }
+             }
+             if (locationTabPosition == 0) {
+                 self.txtAdressFrom.text = nameStreet;
+                 [[NSUserDefaults standardUserDefaults] setObject:nameStreet forKey:@"adressFromTrip"];
                  
                  [[NSUserDefaults standardUserDefaults] setObject:lotu forKey:@"longitudeFromTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitudeFromTrip"];
                  
              } else {
-                 self.txtAdressTo.text = address;
-                 [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"adressToTrip"];
-                 if ([address length]>30) {
-                     self.txtAdressTo.text=[address substringToIndex:[address length] - 27];
-                     [[NSUserDefaults standardUserDefaults] setObject:address forKey:@"adressToTrip"];
-                 }
+                 self.txtAdressTo.text = nameStreet;
+                 [[NSUserDefaults standardUserDefaults] setObject:nameStreet forKey:@"adressToTrip"];
+                 
                  [[NSUserDefaults standardUserDefaults] setObject:lotu forKey:@"longitudeToTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitudeToTrip"];
              }
@@ -321,6 +490,7 @@
     }
     else
     {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
         NSString* fromLongitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeFromTrip"];
         NSString* fromLatitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeFromTrip"];
@@ -339,7 +509,6 @@
         NSData *plainData = [data dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
         [unity AddPromotionTrip:base64String];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -359,14 +528,14 @@
     NSString * time= [dateFormat stringFromDate:myDate];
     self.txtDateTime.text=time;
     [[NSUserDefaults standardUserDefaults] setObject:time forKey:@"TimePromotinTrip"];
-
+    
     [UIView beginAnimations:@"animateAddContentView" context:nil];
     [UIView setAnimationDuration:0.4];
     CGRect frame=self.ViewPicker.frame;
     frame.origin.y=568;
     self.ViewPicker.frame=frame;
     [UIView commitAnimations];
-
+    
 }
 - (IBAction)CancelSheet:(id)sender {
     [UIView beginAnimations:@"animateAddContentView" context:nil];
@@ -390,6 +559,17 @@
 - (IBAction)Back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
-
 }
+- (IBAction)SearchMap:(id)sender {
+    [UIView beginAnimations:@"animateAddContentView" context:nil];
+    [UIView setAnimationDuration:0.4];
+    CGRect frame=self.ViewtabBar.frame;
+    frame.origin.y=-100;
+    self.ViewtabBar.frame=frame;
+    [UIView commitAnimations];
+    [self.mSearchBar becomeFirstResponder];
+    [self.searchDisplayController setActive:YES animated:YES];
+    background.hidden=NO;
+}
+
 @end

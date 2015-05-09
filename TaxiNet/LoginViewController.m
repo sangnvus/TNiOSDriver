@@ -42,10 +42,6 @@
 }
 
 
-- (IBAction)back:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 - (IBAction)Login:(id)sender {
     
 //    if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
