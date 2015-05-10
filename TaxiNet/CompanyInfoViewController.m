@@ -8,16 +8,45 @@
 
 #import "CompanyInfoViewController.h"
 #import "REFrostedViewController.h"
+#import "AppDelegate.h"
 
 @interface CompanyInfoViewController ()
-
+{
+    AppDelegate *appdelegate;
+}
 @end
 
-@implementation CompanyInfoViewController
+@implementation CompanyInfoViewController{
+    
+}
 
+@synthesize comNameLb,addressLb,cityLb,potalCodeLb,telLb,taxLb,carLb;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
+    [self.viewBar setBackgroundColor:[UIColor colorWithRed:1 green:0.251 blue:0 alpha:1]];
+    [self.viewContent setBackgroundColor:[UIColor colorWithRed:0.996 green:0.937 blue:0.906 alpha:1]];
+
+    appdelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSArray *vehicleInfo = [appdelegate.yoursefl objectForKey:@"vehicleDTO"];
+    NSString *carName = [NSString stringWithFormat:@"%@ %@",[vehicleInfo valueForKey:@"carMaker"],[vehicleInfo valueForKey:@"carTitle"]];
+    NSUserDefaults *companyInfo = [NSUserDefaults standardUserDefaults];
+    
+    comNameLb.text = [companyInfo objectForKey:@"companyName"];
+    addressLb.text = [companyInfo objectForKey:@"companyAddress"];
+    cityLb.text = [companyInfo objectForKey:@"companyCity"];
+    potalCodeLb.text = [companyInfo objectForKey:@"companyPostalCode"];
+    telLb.text = [companyInfo objectForKey:@"companyPhone"];
+    taxLb.text = [companyInfo objectForKey:@"companyTaxCode"];
+    carLb.text = carName;
+    
+
+    
+}
+
+-(void)checkResponseData{
+    
 }
 
 - (void)didReceiveMemoryWarning {

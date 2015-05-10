@@ -25,31 +25,25 @@
 @property (strong, nonatomic) IBOutlet UITextField *lastNameField;
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
 @property (strong, nonatomic) IBOutlet UITextField *phoneNoField;
-@property (strong, nonatomic) IBOutlet UITextField *passwordField;
 
 @property (strong, nonatomic) IBOutlet UILabel *firstNameLb;
 @property (strong, nonatomic) IBOutlet UILabel *lastNameLb;
 @property (strong, nonatomic) IBOutlet UILabel *emailLb;
 @property (strong, nonatomic) IBOutlet UILabel *phoneNoLb;
-@property (strong, nonatomic) IBOutlet UILabel *passwordLb;
-
-
+@property (strong, nonatomic) IBOutlet UILabel *balanceLb;
 
 @property (strong, nonatomic) IBOutlet UIImageView *riderAvatar;
 @property (strong, nonatomic) IBOutlet UILabel *userName;
 
--(void)showRiderDetailsToEditingWithUserName:(NSString*)userName
-                               loginWithPass:(NSString*)password
-                                   withFname:(NSString*)firstName
-                                   withLname:(NSString*)lastName
-                                   withEmail:(NSString*)email
-                                 withPhoneNo:(NSString*)phoneNo;
+-(void)showDriverDetailsToEditingWithFname:(NSString*)firstName
+                                withLname:(NSString*)lastName
+                                withEmail:(NSString*)email
+                              withPhoneNo:(NSString*)phoneNo;
 
--(void)showRiderDetailsReadOnlyWithUserName:(NSString*)userName
-                              loginWithPass:(NSString*)password
-                                  withFname:(NSString*)firstName
-                                  withLname:(NSString*)lastName
-                                  withEmail:(NSString*)email
-                                withPhoneNo:(NSString*)phoneNo;
+-(void)showDriverDetailsReadOnlyWithFname:(NSString*)firstName
+                               withLname:(NSString*)lastName
+                               withEmail:(NSString*)email
+                             withPhoneNo:(NSString*)phoneNo withBalance:(NSString*)balance;
+-(void)checkDataResponse:(NSString*)message;
 
 @end

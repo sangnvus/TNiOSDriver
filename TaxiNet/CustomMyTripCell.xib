@@ -1,0 +1,21 @@
+//
+//  MyTripCustomCell.h
+//  TaxiNetDriver
+//
+//  Created by Nguyen Hoai Nam on 5/10/15.
+//  Copyright (c) 2015 Louis Nhat. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MyTripCustomCell : UITableViewCell
+
+
+@property (strong, nonatomic) IBOutlet UILabel *dateTimeLb;
+@property (strong, nonatomic) IBOutlet UILabel *customerNameLb;
+@property (strong, nonatomic) IBOutlet UILabel *fromAddressLb;
+@property (strong, nonatomic) IBOutlet UILabel *toAddressLb;
+
+
+
+@end

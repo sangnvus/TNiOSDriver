@@ -13,8 +13,8 @@
 @end
 
 @implementation AppDelegate
-@synthesize yoursefl;
-@synthesize locationManager;
+@synthesize yoursefl,myTripInfo;
+@synthesize locationManager,profileFlag;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -49,7 +49,9 @@
                                stringByReplacingOccurrencesOfString: @">" withString: @""]
                               stringByReplacingOccurrencesOfString: @" " withString: @""];
     
-    NSLog(@"%@",deviceToke1n);
+    NSLog(@"DEVICE:%@",deviceToke1n);
+    profileFlag = @"0";
+    NSLog(@"profile flag:%@,",profileFlag);
     [[NSUserDefaults standardUserDefaults] setObject:deviceToke1n forKey:@"deviceToken"];
 
 //    NSLog(@"My token is: %@", deviceToken);
@@ -57,6 +59,7 @@
 }
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+
     NSLog(@"didFailWithError: %@", error);
     UIAlertView *errorAlert = [[UIAlertView alloc]
                                initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -82,6 +85,8 @@
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     NSLog(@"Failed to get token, error: %@", error);
+    profileFlag = @"0";
+    NSLog(@"AAAAASSSSDDXXXXXXXXXXXXXXXXX%@",profileFlag);
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:
 (NSDictionary *)userInfo {

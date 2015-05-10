@@ -15,12 +15,17 @@
 #import "CompanyInfoViewController.h"
 #import "unity.h"
 #import "PromotionTripViewController.h"
+#import "CompanyInfoViewController.h"
+#import "MyTripViewController.h"
+#import "AboutUsViewController.h"
+#import "SupportViewController.h"
 
 @interface DEMOMenuViewController (){
     AppDelegate*appDelegate;
     UIImageView *imageView;
     UILabel *label;
     UIStoryboard *mainStoryboard;
+    UIStoryboard *otherStoryboard;
     NavigationController *navigationController;
     UIStoryboard *mainStoryboard1;
 }
@@ -34,6 +39,7 @@
     [super viewDidLoad];
     mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
     mainStoryboard1 = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    otherStoryboard = [UIStoryboard storyboardWithName:@"Other" bundle:nil];
 
     navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
     HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
@@ -51,7 +57,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"10487216_687099491374102_218448137921331276_n.jpg"];
+        imageView.image = [UIImage imageNamed:@"driver_icon.jpg"];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = 50.0;
         imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -62,7 +68,7 @@
         
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
         label.textAlignment=NSTextAlignmentCenter;
-        label.text = @"Louis Nhat";
+        label.text = @"Driver Application";
         label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
@@ -102,27 +108,42 @@
     }
     else if (indexPath.row == 2)
     {
-        CompanyInfoViewController *controller = (CompanyInfoViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"CompanyInfoViewController"];
+        CompanyInfoViewController *controller = (CompanyInfoViewController*)[otherStoryboard instantiateViewControllerWithIdentifier: @"MyTrip"];
         [navigationController pushViewController:controller animated:YES];
     }
     else if (indexPath.row == 3)
     {
+       // NSUserDefaults *userDF = [NSUserDefaults standardUserDefaults];
+        
+      //  [unity getCompanyInfoWithDriderId:[userDF objectForKey:@"idDriver"] owner:self];
+        CompanyInfoViewController *controller = (CompanyInfoViewController*)[otherStoryboard instantiateViewControllerWithIdentifier: @"CompanyInfo"];
+        [navigationController pushViewController:controller animated:YES];
+    }
+    else if (indexPath.row == 4){
         PromotionTripViewController *controller = (PromotionTripViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"PromotionTripViewController"];
+        [navigationController pushViewController:controller animated:YES];
+    }
+    else if (indexPath.row == 5){
+        SupportViewController *controller = (SupportViewController*)[otherStoryboard instantiateViewControllerWithIdentifier: @"AboutUs"];
         [navigationController pushViewController:controller animated:YES];
     }
     else if (indexPath.row == 6)
     {
+        SupportViewController *controller = (SupportViewController*)[otherStoryboard instantiateViewControllerWithIdentifier: @"Support"];
+        [navigationController pushViewController:controller animated:YES];
+    }
+    else if (indexPath.row == 7){
         LoginViewController  *controller = (LoginViewController *)[mainStoryboard1 instantiateViewControllerWithIdentifier: @"LoginViewController"];
         [navigationController pushViewController:controller animated:YES];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
-//        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
-//        NSDictionary * dict = [defs dictionaryRepresentation];
-//        for (id key in dict) {
-//            [defs removeObjectForKey:key];
-//        }
-//        [defs synchronize];
-//        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-//        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+        //        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+        //        NSDictionary * dict = [defs dictionaryRepresentation];
+        //        for (id key in dict) {
+        //            [defs removeObjectForKey:key];
+        //        }
+        //        [defs synchronize];
+        //        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        //        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         [unity LogOut:idDriver];
     }
     self.frostedViewController.contentViewController = navigationController;
@@ -145,7 +166,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,7 +178,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-        NSArray *titles = @[@"Home", @"Profile", @"History", @"Promotion Trips",@"About US", @"Support",@"Logout"];
+        NSArray *titles = @[@"Home", @"Profile", @"My Trips",@"Company info", @"Promotion Trips",@"About US", @"Support",@"Logout"];
         cell.textLabel.text = titles[indexPath.row];
     
     return cell;

@@ -16,6 +16,8 @@
 @property (nonatomic,strong) NSMutableDictionary *yoursefl;
 @property (nonatomic,strong) NSDictionary *RiderInfo;
 @property (nonatomic,strong) NSDictionary *tripinfo;
+@property (nonatomic,strong) NSString *profileFlag;
+@property (nonatomic,strong) NSMutableArray *myTripInfo;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

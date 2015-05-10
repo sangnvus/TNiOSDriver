@@ -12,19 +12,26 @@
  */
 
 #import "unity.h"
-#define URL @"http://192.168.0.102:8080"
-#define URL_SIGNIN @"/TN/restServices/DriverController/LoginiOS"
-#define UPDATE_URL @"/TN/restServices/riderController/UpdateRideriOS"
-#define NEAR_TAXI_URL @"/TN/restServices/DriverController/getNearDriver"
-#define FIND_PROMOTION_TRIP_URL @"/TN/restServices/PromotionTripController/FindPromotionTip"
-#define GETTRIP @"/TN/restServices/TripController/GetRequestForDriveriOS"
-#define UPDATECURRENT @"/TN/restServices/DriverController/UpdateCurrentStatusiOS"
-#define UPDATETRIP @"/TN/restServices/TripController/UpdateTripiOS"
-#define LOGOUT @"/TN/restServices/DriverController/Logout"
-#define COMPLETETRIP @"/TN/restServices/TripController/CompleteTripiOS"
-#define LISTPROMOTIONTRIP @"/TN/restServices/PromotionTripController/GetListPromotionTripiOS"
-#define ADDPROMOTIONTRIP @"/TN/restServices/PromotionTripController/AddPromotionTripiOS"
-#define UPDATEPROMOTIONTRIP @"/TN/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
+// 112.78.6.241
+
+#define URL @"http://callingme.info/taxinet"
+#define URL_SIGNIN @"/restServices/DriverController/LoginiOS"
+#define UPDATE_URL @"/restServices/DriverController/UpdateDriveriOS"
+#define CHANGE_PASSWORD @"/restServices/DriverController/ChangePasswordiOS"
+#define NEAR_TAXI_URL @"/restServices/DriverController/getNearDriver"
+#define FIND_PROMOTION_TRIP_URL @"/restServices/PromotionTripController/FindPromotionTip"
+#define GETTRIP @"/restServices/TripController/GetRequestForDriveriOS"
+#define UPDATECURRENT @"/restServices/DriverController/UpdateCurrentStatusiOS"
+#define UPDATETRIP @"/restServices/TripController/UpdateTripiOS"
+#define LOGOUT @"/restServices/DriverController/Logout"
+#define COMPLETETRIP @"/restServices/TripController/CompleteTripiOS"
+#define LISTPROMOTIONTRIP @"/restServices/PromotionTripController/GetListPromotionTripiOS"
+#define ADDPROMOTIONTRIP @"/restServices/PromotionTripController/AddPromotionTripiOS"
+#define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
+#define GET_COMPANY_INFO @"/restServices/CompanyController/findCompanyByDriverId"
+#define GET_MYTRIP @"/restServices/TripController/GetListCompleteTripiOS"
+
+
 @implementation unity
 
 +(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status
@@ -65,6 +72,9 @@
 +(void)login_by_email : (NSString*)email pass:(NSString *)pass regId:(NSString*)regId deviceType:(NSString*)deviceType owner:(LoginViewController*)owner
 {
     UserInfo *model = [[UserInfo alloc] init];
+    if ([regId isEqualToString:@""] || [regId length] == 0) {
+        regId = @"123";
+    }
     
     NSString *url=[NSString stringWithFormat:@"%@%@",URL,URL_SIGNIN];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -83,7 +93,7 @@
           failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
          UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
-                                                          message:NSLocalizedString(@"please check internet connection",nil)
+                                                          message:NSLocalizedString(@"please check internet connection login",nil)
                                                          delegate:self
                                                 cancelButtonTitle:NSLocalizedString(@"OK",nil)
                                                 otherButtonTitles:nil, nil];
@@ -92,30 +102,20 @@
 
      }];
 }
-+(void)register_by_email : (NSString*)email password:(NSString *)pass firstname:(NSString *)firstname lastname:(NSString *)lastname phone:(NSString *)phone language:(NSString *)language usergroup:(NSString *)usergroup countrycode:(NSString *)countrycode
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
-    NSString *api=[NSString stringWithFormat:@"%@/TN/restServices/CommonController/register?email=%@&password=%@&firstname=%@&lastname=%@&phone=%@&language=%@&usergroup=%@&countrycode=%@",URL,email,pass,firstname,lastname,phone,language,usergroup,countrycode];
-    NSLog(@"api:%@",api);
 
-    [manager GET:api parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-}
-
-+(void)updateByRiderById:(NSString *)riderId firstName:(NSString *)firstName lastName:(NSString *)lastName email:(NSString *)email phoneNo:(NSString *)phoneNo
++(void)updateByDriverById:(NSString *)jsonData owner:(ProfileViewController *)owner
 {
     NSString *url=[NSString stringWithFormat:@"%@%@",URL,UPDATE_URL];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params2 = @ {@"id":riderId, @"firstname":firstName, @"lastname":lastName, @"phoneNumber":phoneNo, @"email":email};
+    NSDictionary *params2 = @ {@"json":jsonData};
     [manager POST:url
        parameters:params2  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+           [owner checkDataResponse:[responseObject objectForKey:@"message"]];
+           
        }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"ERROR UPDATE: %@",error);
               UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@"LỖI"
                                                                message:NSLocalizedString(@"Cap nhat du lieu khong thanh cong ",nil)
                                                               delegate:self
@@ -267,5 +267,98 @@
               
           }];
 }
++(void)changePasswordWithDriverId:(NSString *)driverId
+                      oldPassword:(NSString *)oldPassword
+                         password:(NSString *)password
+                            owner:(ChangePasswordViewController *)owner
+{
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,CHANGE_PASSWORD];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *param = @{@"id":driverId,@"oldpassword":oldPassword,@"newpassword":password};
+    [manager POST:url
+       parameters:param
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              [owner checkResponseMessage:[NSString stringWithFormat:@"%@",[responseObject objectForKey:@"message"]]];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                               message:NSLocalizedString(@"please check your internet connection",nil)
+                                                              delegate:self
+                                                     cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                     otherButtonTitles:nil, nil];
+              [alertTmp show];
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"offLoginloading" object:self];
+
+              
+          }];
+    
+}
++(void)getCompanyInfoWithDriderId:(NSString *)driverId
+{
+    
+    NSString *url=[NSString stringWithFormat:@"%@%@?id=%@",URL,GET_COMPANY_INFO,driverId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+   // NSDictionary *params = @ {@"id":driverId};
+    
+    [manager GET:url parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSLog(@"SUCCESS:%@",responseObject);
+         NSUserDefaults *companyInfo = [NSUserDefaults standardUserDefaults];
+         [companyInfo setObject:[responseObject objectForKey:@"name"] forKey:@"companyName"];
+         [companyInfo setObject:[responseObject objectForKey:@"address"] forKey:@"companyAddress"];
+         [companyInfo setObject:[responseObject objectForKey:@"city"] forKey:@"companyCity"];
+         [companyInfo setObject:[responseObject objectForKey:@"postalCode"] forKey:@"companyPostalCode"];
+         [companyInfo setObject:[responseObject objectForKey:@"phone"] forKey:@"companyPhone"];
+         [companyInfo setObject:[responseObject objectForKey:@"vatNumber"] forKey:@"companyTaxCode"];
+         [companyInfo setObject:[responseObject objectForKey:@"companyID"] forKey:@"companyId"];
+
+
+     }
+          failure:
+     ^(AFHTTPRequestOperation *operation, NSError *error) {
+         UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                          message:NSLocalizedString(@"Please check your internet connection",nil)
+                                                         delegate:self
+                                                cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                otherButtonTitles:nil, nil];
+         [alertTmp show];
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"offLoginloading" object:self];
+         
+     }];
+    
+}
+
++(void)getMyTripHistoryWithDriverId:(NSString *)driverId onwer:(MyTripViewController *)owner
+{
+    MyTripInfo *myTrip = [[MyTripInfo alloc]init];
+    NSString *url = [NSString stringWithFormat:@"%@%@?id=%@",URL,GET_MYTRIP,driverId];
+    NSLog(@"URL my trips:%@",url);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //NSDictionary *param = @{@"id":driverId,@"oldpassword":oldPassword,@"newpassword":password};
+    [manager GET:url
+       parameters:nil
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              myTrip.myTripList = [NSArray arrayWithArray:responseObject];
+              owner.myTripInfo = myTrip.myTripList;
+              [owner checkData];
+              
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                               message:NSLocalizedString(@"Please check your internet connection",nil)
+                                                              delegate:self
+                                                     cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                     otherButtonTitles:nil, nil];
+              [alertTmp show];
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"offLoginloading" object:self];
+              
+              
+          }];
+    
+}
+
 
 @end
