@@ -33,7 +33,6 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    NSLog(@"%@",launchOptions);
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.distanceFilter = kCLDistanceFilterNone;

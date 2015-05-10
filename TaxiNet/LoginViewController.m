@@ -43,7 +43,7 @@
 
 
 - (IBAction)Login:(id)sender {
-    
+//    
 //    if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
 //        UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
 //                                                         message:NSLocalizedString(@"please input username",nil)
