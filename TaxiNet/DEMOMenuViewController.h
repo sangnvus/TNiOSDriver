@@ -11,4 +11,5 @@
 
 @interface DEMOMenuViewController : UITableViewController
 @property (strong, nonatomic) NSString*strAvatar;
+//@property (strong, nonatomic) NSDictionary *companyInfo;
 @end

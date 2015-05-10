@@ -12,11 +12,22 @@
 #import "UserInfo.h"
 #import "HomeViewController.h"
 #import "PromotionTripViewController.h"
+#import "ProfileViewController.h"
+#import "ChangePasswordViewController.h"
+#import "DEMOMenuViewController.h"
+#import "MyTripViewController.h"
+#import "MyTripInfo.h"
+
 @class HomeViewController;
 @class PromotionTripViewController;
 @interface unity : NSObject
 
 +(void)login_by_email : (NSString*)email pass:(NSString *)pass regId:(NSString*)regId deviceType:(NSString*)deviceType owner:(LoginViewController*)owner;
+
++(void)updateByDriverById:(NSString*)jsonData owner:(ProfileViewController*)owner;
+
++(void)getNearTaxi:(NSString*)latitude
+     andLongtitude:(NSString*)longtitude owner:(HomeViewController *)owner;
 +(void)register_by_email : (NSString*)email password:(NSString *)pass firstname:(NSString *)firstname lastname:(NSString *)lastname phone:(NSString *)phone language:(NSString *)language usergroup:(NSString *)usergroup countrycode:(NSString *)countrycode;
 +(void)updateByRiderById : (NSString*)riderId
                 firstName:(NSString*)firstName
@@ -31,4 +42,10 @@
 +(void)GetListPromotionTrip: (NSString *)idDriver owner:(PromotionTripViewController *)owner;
 +(void)AddPromotionTrip: (NSString *)base64;
 +(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status;
++(void)changePasswordWithDriverId:(NSString*)driverId
+                      oldPassword:(NSString*)oldPassword
+                         password:(NSString*)password owner:(ChangePasswordViewController*)owner;
++(void)getCompanyInfoWithDriderId:(NSString*)driverId;
++(void)getMyTripHistoryWithDriverId:(NSString*)driverId onwer:(MyTripViewController*)owner;
+
 @end

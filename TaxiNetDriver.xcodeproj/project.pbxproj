@@ -105,6 +105,16 @@
 		77FE6B3C1AFD3F2E00707233 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 77FE6B3B1AFD3F2E00707233 /* search.png */; };
 		8F025F2F1ADC28DB0044087F /* yourlogohere.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F025F2E1ADC28DB0044087F /* yourlogohere.png */; };
 		8F3DC47F1AD97FC9009A2FEF /* ChangeAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3DC47E1AD97FC9009A2FEF /* ChangeAddressViewController.m */; };
+		8F7C57CD1AFD357900C25062 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57CC1AFD357900C25062 /* ChangePasswordViewController.m */; };
+		8F7C57CF1AFDCF0500C25062 /* Other.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F7C57CE1AFDCF0500C25062 /* Other.storyboard */; };
+		8F7C57D31AFDF89900C25062 /* SupportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57D21AFDF89900C25062 /* SupportViewController.m */; };
+		8F7C57D61AFDF8B200C25062 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57D51AFDF8B200C25062 /* AboutUsViewController.m */; };
+		8F7C57D91AFDF93F00C25062 /* MyTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57D81AFDF93F00C25062 /* MyTripViewController.m */; };
+		8F7C57DB1AFE56EA00C25062 /* driver_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8F7C57DA1AFE56EA00C25062 /* driver_icon.jpg */; };
+		8F7C57E51AFE8C4E00C25062 /* MyTripInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57E41AFE8C4E00C25062 /* MyTripInfo.m */; };
+		8F7C57E81AFE8E3700C25062 /* MyTripDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57E71AFE8E3700C25062 /* MyTripDetailsViewController.m */; };
+		8F7C57F41AFF2FD800C25062 /* MyTripTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7C57F21AFF2FD800C25062 /* MyTripTableViewCell.m */; };
+		8F7C57F51AFF2FD800C25062 /* MyTripTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7C57F31AFF2FD800C25062 /* MyTripTableViewCell.xib */; };
 		8F9D13B71ADD5FDC00EE8AB4 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9D13B51ADD5FDC00EE8AB4 /* like.png */; };
 		8F9D13B81ADD5FDC00EE8AB4 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F9D13B61ADD5FDC00EE8AB4 /* star.png */; };
 /* End PBXBuildFile section */
@@ -275,6 +285,23 @@
 		8F3DC4831AD98F46009A2FEF /* calender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = calender.png; path = ../../../../../../Desktop/picTN/calender.png; sourceTree = "<group>"; };
 		8F3DC4841AD98F46009A2FEF /* contact.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact.png; path = ../../../../../../Desktop/picTN/contact.png; sourceTree = "<group>"; };
 		8F3DC48D1AD99881009A2FEF /* iconlocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iconlocation.png; path = ../../../../../../Desktop/picTN/iconlocation.png; sourceTree = "<group>"; };
+		8F7C57CB1AFD357900C25062 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		8F7C57CC1AFD357900C25062 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		8F7C57CE1AFDCF0500C25062 /* Other.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Other.storyboard; sourceTree = "<group>"; };
+		8F7C57D11AFDF89900C25062 /* SupportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportViewController.h; sourceTree = "<group>"; };
+		8F7C57D21AFDF89900C25062 /* SupportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportViewController.m; sourceTree = "<group>"; };
+		8F7C57D41AFDF8B200C25062 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		8F7C57D51AFDF8B200C25062 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		8F7C57D71AFDF93F00C25062 /* MyTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTripViewController.h; sourceTree = "<group>"; };
+		8F7C57D81AFDF93F00C25062 /* MyTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTripViewController.m; sourceTree = "<group>"; };
+		8F7C57DA1AFE56EA00C25062 /* driver_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = driver_icon.jpg; sourceTree = "<group>"; };
+		8F7C57E31AFE8C4E00C25062 /* MyTripInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTripInfo.h; sourceTree = "<group>"; };
+		8F7C57E41AFE8C4E00C25062 /* MyTripInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTripInfo.m; sourceTree = "<group>"; };
+		8F7C57E61AFE8E3700C25062 /* MyTripDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTripDetailsViewController.h; sourceTree = "<group>"; };
+		8F7C57E71AFE8E3700C25062 /* MyTripDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTripDetailsViewController.m; sourceTree = "<group>"; };
+		8F7C57F11AFF2FD800C25062 /* MyTripTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTripTableViewCell.h; sourceTree = "<group>"; };
+		8F7C57F21AFF2FD800C25062 /* MyTripTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTripTableViewCell.m; sourceTree = "<group>"; };
+		8F7C57F31AFF2FD800C25062 /* MyTripTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyTripTableViewCell.xib; sourceTree = "<group>"; };
 		8F9D13B51ADD5FDC00EE8AB4 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		8F9D13B61ADD5FDC00EE8AB4 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -365,8 +392,8 @@
 		7733C36B1AC6937B007A15ED /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7733C36C1AC6938F007A15ED /* UserInfo.h */,
-				7733C36D1AC6938F007A15ED /* UserInfo.m */,
+				8F7C57E21AFE8BE200C25062 /* Data */,
+				772BBE161ABF127E0098AB20 /* untity */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -411,12 +438,10 @@
 		7743189D1AA73DB9001CF128 /* TaxiNet */ = {
 			isa = PBXGroup;
 			children = (
+				8F7C57C91AFD1AFA00C25062 /* Controller */,
+				8F7C57C81AFD1AF100C25062 /* View */,
 				7733C36B1AC6937B007A15ED /* Model */,
-				772BBE161ABF127E0098AB20 /* untity */,
 				774318F71AAC414C001CF128 /* Lib */,
-				774318F11AA96359001CF128 /* HomeView */,
-				774318D21AA7476C001CF128 /* AppLogin */,
-				774318D11AA74751001CF128 /* AppMain */,
 				774318C81AA74568001CF128 /* Image */,
 				7743189E1AA73DBA001CF128 /* Supporting Files */,
 			);
@@ -455,6 +480,7 @@
 		774318C81AA74568001CF128 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				8F7C57DA1AFE56EA00C25062 /* driver_icon.jpg */,
 				77FE6B3B1AFD3F2E00707233 /* search.png */,
 				77FE6B391AFD379100707233 /* mylocation.png */,
 				77FDA4881AED410F00AECADE /* text_input.png */,
@@ -506,7 +532,6 @@
 				774318DF1AA750BD001CF128 /* NavigationController.m */,
 				774318A21AA73DBA001CF128 /* AppDelegate.h */,
 				774318A31AA73DBA001CF128 /* AppDelegate.m */,
-				774318AB1AA73DBA001CF128 /* Main.storyboard */,
 			);
 			name = AppMain;
 			sourceTree = "<group>";
@@ -523,15 +548,8 @@
 		774318F11AA96359001CF128 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
-				77FDA4821AED2D0B00AECADE /* Payment */,
-				77F15CDD1AE8C61E004CB232 /* PromotionTrip */,
-				774318F21AA9636A001CF128 /* HomeView.storyboard */,
 				774318F41AA9637D001CF128 /* HomeViewController.h */,
 				774318F51AA9637D001CF128 /* HomeViewController.m */,
-				776090D21AADD7F100C21D94 /* ProfileViewController.h */,
-				776090D31AADD7F100C21D94 /* ProfileViewController.m */,
-				776090D51AADD86D00C21D94 /* CompanyInfoViewController.h */,
-				776090D61AADD86D00C21D94 /* CompanyInfoViewController.m */,
 				8F3DC47D1AD97FC9009A2FEF /* ChangeAddressViewController.h */,
 				8F3DC47E1AD97FC9009A2FEF /* ChangeAddressViewController.m */,
 			);
@@ -631,7 +649,6 @@
 			children = (
 				77FDA4831AED32B400AECADE /* PaymentViewController.h */,
 				77FDA4841AED32B400AECADE /* PaymentViewController.m */,
-				77FDA4851AED32B400AECADE /* PaymentViewController.xib */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -648,6 +665,73 @@
 				8F3DC4841AD98F46009A2FEF /* contact.png */,
 			);
 			name = icon;
+			sourceTree = "<group>";
+		};
+		8F7C57C81AFD1AF100C25062 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				77FDA4851AED32B400AECADE /* PaymentViewController.xib */,
+				774318F21AA9636A001CF128 /* HomeView.storyboard */,
+				774318AB1AA73DBA001CF128 /* Main.storyboard */,
+				8F7C57CE1AFDCF0500C25062 /* Other.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8F7C57C91AFD1AFA00C25062 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8F7C57D01AFDF84900C25062 /* SubFunction */,
+				8F7C57CA1AFD353E00C25062 /* Profile */,
+				774318D21AA7476C001CF128 /* AppLogin */,
+				774318F11AA96359001CF128 /* HomeView */,
+				77F15CDD1AE8C61E004CB232 /* PromotionTrip */,
+				77FDA4821AED2D0B00AECADE /* Payment */,
+				774318D11AA74751001CF128 /* AppMain */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		8F7C57CA1AFD353E00C25062 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				776090D21AADD7F100C21D94 /* ProfileViewController.h */,
+				776090D31AADD7F100C21D94 /* ProfileViewController.m */,
+				8F7C57CB1AFD357900C25062 /* ChangePasswordViewController.h */,
+				8F7C57CC1AFD357900C25062 /* ChangePasswordViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		8F7C57D01AFDF84900C25062 /* SubFunction */ = {
+			isa = PBXGroup;
+			children = (
+				8F7C57D11AFDF89900C25062 /* SupportViewController.h */,
+				8F7C57D21AFDF89900C25062 /* SupportViewController.m */,
+				8F7C57D41AFDF8B200C25062 /* AboutUsViewController.h */,
+				8F7C57D51AFDF8B200C25062 /* AboutUsViewController.m */,
+				776090D51AADD86D00C21D94 /* CompanyInfoViewController.h */,
+				776090D61AADD86D00C21D94 /* CompanyInfoViewController.m */,
+				8F7C57D71AFDF93F00C25062 /* MyTripViewController.h */,
+				8F7C57D81AFDF93F00C25062 /* MyTripViewController.m */,
+				8F7C57E61AFE8E3700C25062 /* MyTripDetailsViewController.h */,
+				8F7C57E71AFE8E3700C25062 /* MyTripDetailsViewController.m */,
+				8F7C57F11AFF2FD800C25062 /* MyTripTableViewCell.h */,
+				8F7C57F21AFF2FD800C25062 /* MyTripTableViewCell.m */,
+				8F7C57F31AFF2FD800C25062 /* MyTripTableViewCell.xib */,
+			);
+			name = SubFunction;
+			sourceTree = "<group>";
+		};
+		8F7C57E21AFE8BE200C25062 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7733C36C1AC6938F007A15ED /* UserInfo.h */,
+				7733C36D1AC6938F007A15ED /* UserInfo.m */,
+				8F7C57E31AFE8C4E00C25062 /* MyTripInfo.h */,
+				8F7C57E41AFE8C4E00C25062 /* MyTripInfo.m */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -734,6 +818,7 @@
 			files = (
 				773F04531AEB72B600D9E69A /* expandableImage.png in Resources */,
 				773F04561AEB730E00D9E69A /* SKSTableViewCell.xib in Resources */,
+				8F7C57DB1AFE56EA00C25062 /* driver_icon.jpg in Resources */,
 				77F15CF11AE909D0004CB232 /* expandableImage.png in Resources */,
 				8F9D13B71ADD5FDC00EE8AB4 /* like.png in Resources */,
 				774318DC1AA74DAE001CF128 /* text_email.png in Resources */,
@@ -747,6 +832,7 @@
 				775B5F771AE02BF100765F4F /* button_find.png in Resources */,
 				77FDA4891AED410F00AECADE /* text_input.png in Resources */,
 				775B5F691ADEDA3C00765F4F /* toMap.png in Resources */,
+				8F7C57F51AFF2FD800C25062 /* MyTripTableViewCell.xib in Resources */,
 				7772F4461AD7CFCD00467247 /* to.png in Resources */,
 				774318E51AA75604001CF128 /* backgro_login.png in Resources */,
 				77FE6B3A1AFD379100707233 /* mylocation.png in Resources */,
@@ -759,6 +845,7 @@
 				774318D01AA7465A001CF128 /* splast.png in Resources */,
 				774318DB1AA74DAE001CF128 /* Button_fb.png in Resources */,
 				77FDA4871AED32B400AECADE /* PaymentViewController.xib in Resources */,
+				8F7C57CF1AFDCF0500C25062 /* Other.storyboard in Resources */,
 				774318CF1AA7465A001CF128 /* btn_regis.png in Resources */,
 				774318DD1AA74DAE001CF128 /* text_pass.png in Resources */,
 				77F15CF21AE909D0004CB232 /* expandableImage@2x.png in Resources */,
@@ -798,6 +885,7 @@
 				774318A71AA73DBA001CF128 /* TaxiNet.xcdatamodeld in Sources */,
 				774318A41AA73DBA001CF128 /* AppDelegate.m in Sources */,
 				773F04501AEB72B600D9E69A /* SKSTableView.m in Sources */,
+				8F7C57E81AFE8E3700C25062 /* MyTripDetailsViewController.m in Sources */,
 				7741833D1AC9CC8F00ABC5E6 /* UIViewController+CWPopup.m in Sources */,
 				772BBE131ABF0EDA0098AB20 /* UIProgressView+AFNetworking.m in Sources */,
 				776090C71AADD59C00C21D94 /* REFrostedContainerViewController.m in Sources */,
@@ -806,6 +894,7 @@
 				7733C36E1AC6938F007A15ED /* UserInfo.m in Sources */,
 				776090CB1AADD59C00C21D94 /* UIViewController+REFrostedViewController.m in Sources */,
 				776090D11AADD61A00C21D94 /* DEMOMenuViewController.m in Sources */,
+				8F7C57E51AFE8C4E00C25062 /* MyTripInfo.m in Sources */,
 				776090C91AADD59C00C21D94 /* UIImage+REFrostedViewController.m in Sources */,
 				773F04511AEB72B600D9E69A /* SKSTableViewCell.m in Sources */,
 				774318E01AA750BD001CF128 /* NavigationController.m in Sources */,
@@ -813,12 +902,14 @@
 				774318FF1AAC415A001CF128 /* JPSThumbnailAnnotation.m in Sources */,
 				772BBE0E1ABF0EDA0098AB20 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				772BBE051ABF0EDA0098AB20 /* AFHTTPRequestOperation.m in Sources */,
+				8F7C57CD1AFD357900C25062 /* ChangePasswordViewController.m in Sources */,
 				776090CA1AADD59C00C21D94 /* UIView+REFrostedViewController.m in Sources */,
 				772BBE081ABF0EDA0098AB20 /* AFNetworkReachabilityManager.m in Sources */,
 				772BBE101ABF0EDA0098AB20 /* UIAlertView+AFNetworking.m in Sources */,
 				776090D71AADD86D00C21D94 /* CompanyInfoViewController.m in Sources */,
 				772BBE0D1ABF0EDA0098AB20 /* AFURLSessionManager.m in Sources */,
 				774319001AAC415A001CF128 /* JPSThumbnailAnnotationView.m in Sources */,
+				8F7C57D31AFDF89900C25062 /* SupportViewController.m in Sources */,
 				772BBE061ABF0EDA0098AB20 /* AFHTTPRequestOperationManager.m in Sources */,
 				772BBE071ABF0EDA0098AB20 /* AFHTTPSessionManager.m in Sources */,
 				776090C61AADD59C00C21D94 /* RECommonFunctions.m in Sources */,
@@ -830,12 +921,15 @@
 				772BBE121ABF0EDA0098AB20 /* UIImageView+AFNetworking.m in Sources */,
 				776090D41AADD7F100C21D94 /* ProfileViewController.m in Sources */,
 				773F04611AEBC69600D9E69A /* InforRiderViewController.m in Sources */,
+				8F7C57D61AFDF8B200C25062 /* AboutUsViewController.m in Sources */,
 				774318A11AA73DBA001CF128 /* main.m in Sources */,
 				774318D71AA747C1001CF128 /* LoginViewController.m in Sources */,
 				772BBE091ABF0EDA0098AB20 /* AFSecurityPolicy.m in Sources */,
 				773F04521AEB72B600D9E69A /* SKSTableViewCellIndicator.m in Sources */,
+				8F7C57F41AFF2FD800C25062 /* MyTripTableViewCell.m in Sources */,
 				774318F61AA9637D001CF128 /* HomeViewController.m in Sources */,
 				7733C3721AC6956C007A15ED /* MBProgressHUD.m in Sources */,
+				8F7C57D91AFDF93F00C25062 /* MyTripViewController.m in Sources */,
 				8F3DC47F1AD97FC9009A2FEF /* ChangeAddressViewController.m in Sources */,
 				772BBE151ABF0EDA0098AB20 /* UIWebView+AFNetworking.m in Sources */,
 				773F04441AEB721A00D9E69A /* AddTripViewController.m in Sources */,
