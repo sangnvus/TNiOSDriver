@@ -13,11 +13,16 @@
 @end
 
 @implementation AppDelegate
+{
+    int updatelocation;
+}
 @synthesize yoursefl,myTripInfo;
 @synthesize locationManager,profileFlag;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    updatelocation =0;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -70,7 +75,9 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    //    NSLog(@"didUpdateToLocation: %@", newLocation);
+    updatelocation ++;
+//        NSLog(@"didUpdateToLocation: %i", updatelocation);
+    
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
@@ -79,6 +86,9 @@
         [[NSUserDefaults standardUserDefaults] setObject:latu forKey:@"longitude"];
         [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitude"];
         
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updatecurrentStatus" object:self];
+
     }
 }
 

@@ -19,7 +19,6 @@
     int locationStatus;
     UITapGestureRecognizer *gestureFrom, *gestureTo;
     MKRoute *routeDetails;
-    NSMutableArray *arrDataSearched;
     NSInteger selectTo;
     BOOL fromselect;
     NSDictionary *TripDetail;
@@ -27,7 +26,6 @@
 }
 
 
-@property (nonatomic, strong) MKLocalSearch *localSearch;
 
 @end
 
@@ -44,7 +42,6 @@
     fromselect=FALSE;
     locationStatus=0;
     pickRider=0;
-    arrDataSearched = [[NSMutableArray alloc] init];
     //set anchor point focus point
     mapview.delegate = self;
     // Map View
@@ -68,6 +65,7 @@
     [self.boder4 setBackgroundColor: [UIColor colorWithRed:0.784 green:0.78 blue:0.8 alpha:1]];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"getRiderInfo" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"updatecurrentStatus" object:nil];
     TripDetail=[[NSDictionary alloc]init];
     self.ViewDetail.hidden=YES;
     if (appdelegate.tripinfo.count != 0) {
@@ -128,6 +126,7 @@
         }
     }
     if ([[notification name]isEqualToString:@"updatecurrentStatus"]) {
+//        [self updateCurrentStatus];
     }
 }
 -(void)showTrip
@@ -175,7 +174,6 @@
 
         NSString *data = [NSString stringWithFormat:@"{\"location\":\"%@\",\"longitude\":\"%@\",\"latitude\":\"%@\",\"driverId\":\"%@\"}",location,longitudeCurrent,latitudeCurrent,idDriver];
         
-        NSLog(@"%@", data);
         
         NSData *plainData = [data dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
@@ -270,9 +268,7 @@
     [unity updateTrip:requestid userID:idDriver status:@"CA" owner:self];
     self.ViewDetail.hidden=YES;
 }
-- (IBAction)show:(id)sender {
-    [self updateCurrentStatus];
-}
+
 - (void) getReverseGeocode:(CLLocationCoordinate2D) coordinate
 {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
@@ -300,6 +296,17 @@
          }
      }];
     
+}
+
+- (IBAction)setMylocation:(id)sender {
+    NSString* longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
+    NSString* latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+    MKCoordinateRegion region = { {0.0, 0.0 }, { 0.0, 0.0 } };
+    region.center.latitude = [latitude floatValue] ;
+    region.center.longitude = [longitude floatValue];
+    region.span.longitudeDelta = 0.05f;
+    region.span.latitudeDelta = 0.05f;
+    [self.mapview setRegion:region animated:YES];
 }
 
 - (void)findWay {

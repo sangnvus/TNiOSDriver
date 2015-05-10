@@ -144,4 +144,9 @@
     AddTripViewController *controller = (AddTripViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"AddTripViewController"];
     [self.navigationController pushViewController:controller animated:YES];
 }
+- (IBAction)menu:(id)sender {
+    [self.view endEditing:YES];
+    [self.frostedViewController.view endEditing:YES];
+    [self.frostedViewController presentMenuViewController];
+}
 @end

@@ -41,8 +41,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
 - (IBAction)Login:(id)sender {
     
     if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
