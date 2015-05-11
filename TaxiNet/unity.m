@@ -14,7 +14,7 @@
 #import "unity.h"
 // 112.78.6.241
 
-#define URL @"http://callingme.info/taxinet"
+#define URL @"http://192.168.100.11:8080/TN"
 #define URL_SIGNIN @"/restServices/DriverController/LoginiOS"
 #define UPDATE_URL @"/restServices/DriverController/UpdateDriveriOS"
 #define CHANGE_PASSWORD @"/restServices/DriverController/ChangePasswordiOS"

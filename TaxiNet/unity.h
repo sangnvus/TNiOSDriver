@@ -28,6 +28,7 @@
 
 +(void)getNearTaxi:(NSString*)latitude
      andLongtitude:(NSString*)longtitude owner:(HomeViewController *)owner;
+
 +(void)register_by_email : (NSString*)email password:(NSString *)pass firstname:(NSString *)firstname lastname:(NSString *)lastname phone:(NSString *)phone language:(NSString *)language usergroup:(NSString *)usergroup countrycode:(NSString *)countrycode;
 +(void)updateByRiderById : (NSString*)riderId
                 firstName:(NSString*)firstName

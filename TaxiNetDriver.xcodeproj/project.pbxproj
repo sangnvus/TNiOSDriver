@@ -380,20 +380,12 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
-		772BBE161ABF127E0098AB20 /* untity */ = {
-			isa = PBXGroup;
-			children = (
-				772BBE171ABF12BA0098AB20 /* unity.h */,
-				772BBE181ABF12BA0098AB20 /* unity.m */,
-			);
-			name = untity;
-			sourceTree = "<group>";
-		};
 		7733C36B1AC6937B007A15ED /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8F7C57E21AFE8BE200C25062 /* Data */,
-				772BBE161ABF127E0098AB20 /* untity */,
+				772BBE171ABF12BA0098AB20 /* unity.h */,
+				772BBE181ABF12BA0098AB20 /* unity.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -442,7 +434,6 @@
 				8F7C57C81AFD1AF100C25062 /* View */,
 				7733C36B1AC6937B007A15ED /* Model */,
 				774318F71AAC414C001CF128 /* Lib */,
-				774318C81AA74568001CF128 /* Image */,
 				7743189E1AA73DBA001CF128 /* Supporting Files */,
 			);
 			path = TaxiNet;
@@ -670,6 +661,7 @@
 		8F7C57C81AFD1AF100C25062 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				774318C81AA74568001CF128 /* Image */,
 				77FDA4851AED32B400AECADE /* PaymentViewController.xib */,
 				774318F21AA9636A001CF128 /* HomeView.storyboard */,
 				774318AB1AA73DBA001CF128 /* Main.storyboard */,
