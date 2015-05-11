@@ -18,6 +18,8 @@
 @property (nonatomic,strong) NSDictionary *tripinfo;
 @property (nonatomic,strong) NSString *profileFlag;
 @property (nonatomic,strong) NSMutableArray *myTripInfo;
+@property (nonatomic,strong) NSString *deviceToken;
+@property (nonatomic,assign) int *GetDistance;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

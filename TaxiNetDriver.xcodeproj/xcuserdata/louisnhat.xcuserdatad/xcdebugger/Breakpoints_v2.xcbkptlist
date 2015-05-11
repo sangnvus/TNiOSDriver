@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TaxiNet/LoginViewController.m"
-            timestampString = "452803318.384501"
+            timestampString = "452946330.981982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "-Login:"
             landmarkType = "5">
          </BreakpointContent>

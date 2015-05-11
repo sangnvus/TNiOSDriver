@@ -504,7 +504,6 @@
         
         NSString *data = [NSString stringWithFormat:@"{\"id\":\"%@\",\"fromLongitude\":\"%@\",\"fromLatitude\":\"%@\",\"toAddress\":\"%@\",\"fromAddress\":\"%@\",\"toLongitude\":\"%@\",\"toLatitude\":\"%@\",\"time\":\"%@\",\"numberOfseat\":\"%@\",\"fromCity\":\"Ha Noi\",\"toCity\":\"Ha Noi\",\"fee\":\"500000\"}",idDriver,fromLongitude,fromLatitude,toAddress,fromAddress,toLongitude,toLatitude,time,numberOfseat];
         
-        NSLog(@"%@", data);
         
         NSData *plainData = [data dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];

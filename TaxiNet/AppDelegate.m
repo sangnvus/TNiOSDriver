@@ -17,12 +17,13 @@
     int updatelocation;
 }
 @synthesize yoursefl,myTripInfo;
-@synthesize locationManager,profileFlag;
+@synthesize locationManager,profileFlag,GetDistance;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     updatelocation =0;
+    GetDistance=0;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
@@ -56,6 +57,7 @@
     NSLog(@"DEVICE:%@",deviceToke1n);
     profileFlag = @"0";
     NSLog(@"profile flag:%@,",profileFlag);
+    self.deviceToken=deviceToke1n;
     [[NSUserDefaults standardUserDefaults] setObject:deviceToke1n forKey:@"deviceToken"];
 
 //    NSLog(@"My token is: %@", deviceToken);
@@ -85,7 +87,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:latu forKey:@"longitude"];
         [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitude"];
         
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"updatecurrentStatus" object:self];
 
     }
@@ -100,12 +101,20 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:
 (NSDictionary *)userInfo {
     NSLog(@"push APNS: %@", userInfo);
-    UIAlertView *errorAlert = [[UIAlertView alloc]
-                               initWithTitle:@"Request Taxi" message:@"You have request" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [errorAlert show];
+    NSString *typePush=[userInfo objectForKey:@"notificationType"];
+    if ([typePush isEqualToString:@"PROMOTION_TRIP"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
+    }
+    else
+    {
+        UIAlertView *errorAlert = [[UIAlertView alloc]
+                                   initWithTitle:@"Request Taxi" message:@"You have request" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [errorAlert show];
+        
+        self.RiderInfo=userInfo;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getRiderInfo" object:self];
+    }
 
-    self.RiderInfo=userInfo;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getRiderInfo" object:self];
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

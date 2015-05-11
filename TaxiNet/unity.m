@@ -13,8 +13,9 @@
 
 #import "unity.h"
 // 112.78.6.241
+#define URL @"http://192.168.100.8:8080/TN"
+//#define URL @"http://callingme.info/taxinet"
 
-#define URL @"http://callingme.info/taxinet"
 #define URL_SIGNIN @"/restServices/DriverController/LoginiOS"
 #define UPDATE_URL @"/restServices/DriverController/UpdateDriveriOS"
 #define CHANGE_PASSWORD @"/restServices/DriverController/ChangePasswordiOS"
@@ -27,7 +28,7 @@
 #define COMPLETETRIP @"/restServices/TripController/CompleteTripiOS"
 #define LISTPROMOTIONTRIP @"/restServices/PromotionTripController/GetListPromotionTripiOS"
 #define ADDPROMOTIONTRIP @"/restServices/PromotionTripController/AddPromotionTripiOS"
-#define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
+#define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetails"
 #define GET_COMPANY_INFO @"/restServices/CompanyController/findCompanyByDriverId"
 #define GET_MYTRIP @"/restServices/TripController/GetListCompleteTripiOS"
 
@@ -63,7 +64,7 @@
     [manager POST:url parameters:params2
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSLog(@"update UPDATEPROMOTIONTRIP success");
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
      }
           failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -197,7 +198,6 @@
     [manager POST:url
        parameters:param
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@" UPDATECURRENT success");
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@" UPDATECURRENT failse");

@@ -32,9 +32,8 @@
     
     NSArray *myArray = [[data objectForKey:@"fromAddress"] componentsSeparatedByString:@","];
     if (myArray.count>=1) {
-        self.adressFrom.text=[NSString stringWithFormat:@"From :%@,%@",[myArray objectAtIndex:0],[myArray objectAtIndex:1]];
-        NSArray *adressto = [[data objectForKey:@"toAddress"] componentsSeparatedByString:@","];
-        self.adressTo.text=[NSString stringWithFormat:@"To :%@,%@",[adressto objectAtIndex:0],[adressto objectAtIndex:1]];
+        self.adressFrom.text=[NSString stringWithFormat:@"From :%@",[data objectForKey:@"fromAddress"]];
+        self.adressTo.text=[NSString stringWithFormat:@"To :%@",[data objectForKey:@"toAddress"]];
     }
 
     

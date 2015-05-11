@@ -63,11 +63,10 @@
     }
     else
     {
-        NSUserDefaults *companyDataStore = [NSUserDefaults standardUserDefaults];
         NSString *deviceType = @"iOS";
         [HUD show:YES];
-        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
-        
+//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+        NSString *deviceToken= appdelegate.deviceToken;
         [unity login_by_email:self.emailLogin.text pass:self.passLogin.text regId:deviceToken deviceType:deviceType  owner:self];
 
     }

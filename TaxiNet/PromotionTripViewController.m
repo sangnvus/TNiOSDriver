@@ -9,7 +9,7 @@
 #import "PromotionTripViewController.h"
 #import "SKSTableViewCell.h"
 #import "AddTripViewController.h"
-#import "InforRiderViewController.h"
+#import "RiderInfoViewController.h"
 @interface PromotionTripViewController ()
 
 @end
@@ -18,6 +18,7 @@
 {
     NSArray *arr2;
     NSArray *arrSectionName;
+    UITapGestureRecognizer *gestureGray;
 
 }
 @synthesize Tableview;
@@ -34,9 +35,18 @@
     
     [self.Tableview registerNib:[UINib nibWithNibName:@"SKSTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"SKSTableViewCell"];
+//    self.Tableview.allowsMultipleSelectionDuringEditing = NO;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"hidenGrayView" object:nil];
+    gestureGray = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                          action:@selector(dismissDetail:)];
+    [self.GrayView addGestureRecognizer:gestureGray];
 }
+
 -(void) receiveNotification:(NSNotification *) notification
 {
+    if ([[notification name]isEqualToString:@"hidenGrayView"]) {
+        self.GrayView.hidden=YES;
+    }
     if ([[notification name]isEqualToString:@"NewListPromotin"]) {
         NSLog(@"%@",ArrListPromotion);
         [self reloadTableViewWithData:ArrListPromotion];
@@ -97,15 +107,36 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (!cell)
+//    if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     NSArray *arrRider=[ArrListPromotion[indexPath.row] objectForKey:@"promotionTripRiders"];
     NSDictionary *riderInfo=[arrRider objectAtIndex:indexPath.subRow-1];
     NSDictionary *riderDetail=[riderInfo objectForKey:@"rider"];
+    NSString *status=[riderInfo objectForKey:@"status"];
     NSString *name = [NSString stringWithFormat:@"%@ %@", [riderDetail objectForKey:@"firstName"],[riderDetail objectForKey:@"lastName"]];
     UILabel *nameRider = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 200, 30)];
     nameRider.text = name;
+    [nameRider setTextColor:[UIColor colorWithRed:27.0f/255.0f
+                                            green:159.0f/255.0f
+                                             blue:252.0f/255.0f
+                                            alpha:1.0f]];
     [cell addSubview:nameRider];
+    
+    UILabel *statusRider = [[UILabel alloc]initWithFrame:CGRectMake(220, 12, 100, 15)];
+    if ([status isEqualToString:@"NR"]) {
+        statusRider.text = @"New reqest";
+    }
+    else if ([status isEqualToString:@"AC"])
+    {
+        statusRider.text = @"Acepted";
+    }
+    else if([status isEqualToString:@"RJ"])
+        statusRider.text = @"Rejected";
+    else
+        statusRider.text = @"Request";
+
+    [statusRider setTextColor:[UIColor redColor]];
+    [cell addSubview:statusRider];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -124,15 +155,33 @@
 - (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //        NSLog(@"Row:%d, Subrow:%d", indexPath.row, indexPath.subRow);
+    NSDictionary *dataCell=[ArrListPromotion objectAtIndex:indexPath.row];
     NSArray *arrRider=[ArrListPromotion[indexPath.row] objectForKey:@"promotionTripRiders"];
     NSDictionary *riderInfo=[arrRider objectAtIndex:indexPath.subRow-1];
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
-    InforRiderViewController *controller = (InforRiderViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"InforRiderViewController"];
-    controller.dataRider=riderInfo;
-    [self.navigationController pushViewController:controller animated:YES];
+    RiderInfoViewController *detail = [[RiderInfoViewController alloc] initWithNibName:@"RiderInfoViewController" bundle:nil];
+    detail.vcParent = self;
+    detail.riderData=riderInfo;
+    detail.promotionTripId=[dataCell objectForKey:@"id"];
+    [self presentPopupViewController:detail animated:YES completion:^(void) {
+        NSLog(@"popup view presented");
+    }];
+    self.GrayView.hidden=NO;
+
 }
 
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        //add code here for when you hit delete
+//        [ArrListPromotion removeObjectAtIndex:indexPath.row];
+//        [self reloadTableViewWithData:ArrListPromotion];
+//    }
+//}
+-(void)dismissDetail:(UITapGestureRecognizer *)recognizer
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissDetail" object:self];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
