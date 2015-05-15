@@ -523,6 +523,24 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PZK-7b-KUg">
+                                        <rect key="frame" x="8" y="379" width="304" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MJ-5E-O4l">
+                                                <rect key="frame" x="55" y="15" width="241" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygb-DO-Aku">
+                                                <rect key="frame" x="8" y="15" width="120" height="20"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97307477679999999" green="0.97307477679999999" blue="0.97307477679999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -535,6 +553,7 @@
                         <outlet property="carLb" destination="4Cw-R7-ZqY" id="Tn6-gb-93l"/>
                         <outlet property="cityLb" destination="8jU-ZS-JTW" id="lf6-VR-1Cg"/>
                         <outlet property="comNameLb" destination="h7s-pZ-RCX" id="BgX-aI-dhL"/>
+                        <outlet property="plateLb" destination="7MJ-5E-O4l" id="VZ9-KL-N09"/>
                         <outlet property="potalCodeLb" destination="zs5-oh-l81" id="PwR-fZ-GBb"/>
                         <outlet property="taxLb" destination="7AV-Kd-EG8" id="vDq-uI-Uc8"/>
                         <outlet property="telLb" destination="vdI-nj-BDZ" id="fHK-W2-Tcl"/>
@@ -544,6 +563,7 @@
                         <outlet property="viewCity" destination="LpD-kr-Wa7" id="7lZ-JB-T7E"/>
                         <outlet property="viewComName" destination="ceC-yr-eQG" id="oRO-Gx-CuN"/>
                         <outlet property="viewContent" destination="4eC-Em-wBy" id="Scz-GG-bj0"/>
+                        <outlet property="viewPlate" destination="PZK-7b-KUg" id="emC-BI-hNM"/>
                         <outlet property="viewPortalCode" destination="CTr-ad-duQ" id="nju-j8-oEq"/>
                         <outlet property="viewTax" destination="4cH-kR-bEa" id="I9V-HY-i4d"/>
                         <outlet property="viewTel" destination="oFk-YG-PL0" id="g60-7v-NWp"/>

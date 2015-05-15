@@ -13,8 +13,8 @@
 
 #import "unity.h"
 // 112.78.6.241
-
-#define URL @"http://192.168.100.11:8080/TN"
+#define URL @"http://112.78.6.159:8080/taxinet"
+//#define URL @"http://callingme.info/taxinet"
 #define URL_SIGNIN @"/restServices/DriverController/LoginiOS"
 #define UPDATE_URL @"/restServices/DriverController/UpdateDriveriOS"
 #define CHANGE_PASSWORD @"/restServices/DriverController/ChangePasswordiOS"
@@ -27,7 +27,7 @@
 #define COMPLETETRIP @"/restServices/TripController/CompleteTripiOS"
 #define LISTPROMOTIONTRIP @"/restServices/PromotionTripController/GetListPromotionTripiOS"
 #define ADDPROMOTIONTRIP @"/restServices/PromotionTripController/AddPromotionTripiOS"
-#define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
+#define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetails"
 #define GET_COMPANY_INFO @"/restServices/CompanyController/findCompanyByDriverId"
 #define GET_MYTRIP @"/restServices/TripController/GetListCompleteTripiOS"
 
@@ -63,7 +63,7 @@
     [manager POST:url parameters:params2
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSLog(@"update UPDATEPROMOTIONTRIP success");
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
      }
           failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -197,7 +197,6 @@
     [manager POST:url
        parameters:param
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@" UPDATECURRENT success");
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@" UPDATECURRENT failse");
@@ -339,13 +338,13 @@
 +(void)getMyTripHistoryWithDriverId:(NSString *)driverId onwer:(MyTripViewController *)owner
 {
     MyTripInfo *myTrip = [[MyTripInfo alloc]init];
-    NSString *url = [NSString stringWithFormat:@"%@%@?id=%@",URL,GET_MYTRIP,driverId];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,GET_MYTRIP];
     NSLog(@"URL my trips:%@",url);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //NSDictionary *param = @{@"id":driverId,@"oldpassword":oldPassword,@"newpassword":password};
-    [manager GET:url
-       parameters:nil
+    NSDictionary *param = @{@"id":driverId};
+    [manager POST:url
+       parameters:param
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               myTrip.myTripList = [NSArray arrayWithArray:responseObject];
               owner.myTripInfo = myTrip.myTripList;

@@ -20,7 +20,7 @@
     
 }
 
-@synthesize comNameLb,addressLb,cityLb,potalCodeLb,telLb,taxLb,carLb;
+@synthesize comNameLb,addressLb,cityLb,potalCodeLb,telLb,taxLb,carLb,plateLb;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -40,6 +40,7 @@
     telLb.text = [companyInfo objectForKey:@"companyPhone"];
     taxLb.text = [companyInfo objectForKey:@"companyTaxCode"];
     carLb.text = carName;
+    plateLb.text = [vehicleInfo valueForKey:@"vehiclePlate"];
     
 
     

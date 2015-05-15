@@ -136,14 +136,14 @@
         LoginViewController  *controller = (LoginViewController *)[mainStoryboard1 instantiateViewControllerWithIdentifier: @"LoginViewController"];
         [navigationController pushViewController:controller animated:YES];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
-        //        NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
-        //        NSDictionary * dict = [defs dictionaryRepresentation];
-        //        for (id key in dict) {
-        //            [defs removeObjectForKey:key];
-        //        }
-        //        [defs synchronize];
-        //        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-        //        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+                NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+                NSDictionary * dict = [defs dictionaryRepresentation];
+                for (id key in dict) {
+                    [defs removeObjectForKey:key];
+                }
+                [defs synchronize];
+                NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+                [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         [unity LogOut:idDriver];
     }
     self.frostedViewController.contentViewController = navigationController;

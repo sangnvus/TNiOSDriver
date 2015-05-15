@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UIView *viewTel;
 @property (strong, nonatomic) IBOutlet UIView *viewTax;
 @property (strong, nonatomic) IBOutlet UIView *viewCar;
+@property (strong, nonatomic) IBOutlet UIView *viewPlate;
 
 @property (strong, nonatomic) IBOutlet UILabel *comNameLb;
 @property (strong, nonatomic) IBOutlet UILabel *addressLb;
@@ -28,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *telLb;
 @property (strong, nonatomic) IBOutlet UILabel *taxLb;
 @property (strong, nonatomic) IBOutlet UILabel *carLb;
+@property (strong, nonatomic) IBOutlet UILabel *plateLb;
 
 
 

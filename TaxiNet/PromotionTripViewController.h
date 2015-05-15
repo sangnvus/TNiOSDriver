@@ -11,13 +11,15 @@
 #import "promotionCell.h"
 #import "SKSTableView.h"
 #import "REFrostedViewController.h"
+#import "UIViewController+CWPopup.h"
 
 @interface PromotionTripViewController : UIViewController<SKSTableViewDelegate>
 
-@property(nonatomic,retain) NSArray *ArrListPromotion;
+@property(nonatomic,retain) NSMutableArray *ArrListPromotion;
 //@property (weak, nonatomic) IBOutlet UITableView *tableview;
 - (IBAction)AddPromotionTrip:(id)sender;
 @property (weak, nonatomic) IBOutlet SKSTableView *Tableview;
 - (IBAction)menu:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *GrayView;
 
 @end

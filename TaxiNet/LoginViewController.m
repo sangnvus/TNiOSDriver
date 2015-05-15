@@ -42,6 +42,7 @@
 }
 
 - (IBAction)Login:(id)sender {
+
     
     if (self.emailLogin==nil|| [self.emailLogin.text isEqualToString:@""]) {
         UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
@@ -62,18 +63,14 @@
     }
     else
     {
-        NSUserDefaults *companyDataStore = [NSUserDefaults standardUserDefaults];
         NSString *deviceType = @"iOS";
         [HUD show:YES];
-        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
-        
+//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
+        NSString *deviceToken= appdelegate.deviceToken;
         [unity login_by_email:self.emailLogin.text pass:self.passLogin.text regId:deviceToken deviceType:deviceType  owner:self];
 
     }
-    
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"HomeView" bundle: nil];
-//    HomeViewController *controller = (HomeViewController*)[mainStoryboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
-//    [self.navigationController pushViewController:controller animated:YES];
+
 }
 -(void)checkLogin
 {

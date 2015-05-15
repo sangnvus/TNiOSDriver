@@ -66,6 +66,9 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"getRiderInfo" object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"updatecurrentStatus" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"SetPayment" object:nil];
+
+    
     TripDetail=[[NSDictionary alloc]init];
     self.ViewDetail.hidden=YES;
     if (appdelegate.tripinfo.count != 0) {
@@ -126,7 +129,10 @@
         }
     }
     if ([[notification name]isEqualToString:@"updatecurrentStatus"]) {
-//        [self updateCurrentStatus];
+        [self updateCurrentStatus];
+        if (appdelegate.GetDistance!=0) {
+            
+        }
     }
 }
 -(void)showTrip
@@ -236,7 +242,7 @@
     if (pickRider==2) {
         //pickked
         [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
-//        [unity updateTrip:requestid userID:idDriver status:@"TC" owner:self];
+        [unity updateTrip:requestid userID:idDriver status:@"TC" owner:self];
         NSDictionary *rider=[TripDetail objectForKey:@"rider"];
         NSString *name=[NSString stringWithFormat:@"%@ %@",[rider objectForKey:@"firstName"],[rider objectForKey:@"lastName"]];
         NSString *phone=[rider objectForKey:@"phone"];
