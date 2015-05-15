@@ -22,7 +22,7 @@
     NSInteger selectTo;
     BOOL fromselect;
     NSDictionary *TripDetail;
-
+    NSString *lontitudeA,*lontitudeB,*latitudeA,*latitudeB;
 }
 
 
@@ -36,6 +36,7 @@
 
 @synthesize mapview;
 @synthesize pickRider;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     appdelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -52,6 +53,9 @@
     selectTo=0;
     self.thumbnail.layer.masksToBounds = YES;
     self.thumbnail.layer.cornerRadius = self.thumbnail.frame.size.height/2;
+    [[NSUserDefaults standardUserDefaults] setObject:appdelegate.lontitude forKey:@"longitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:appdelegate.latitude forKey:@"latitude"];
+    
     NSString *longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
     NSString *latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
     JPSThumbnail *annotationTo = [[JPSThumbnail alloc] init];
@@ -67,6 +71,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"getRiderInfo" object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"updatecurrentStatus" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"SetPayment" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"KICK_OUT" object:nil];
 
     
     TripDetail=[[NSDictionary alloc]init];
@@ -89,6 +94,9 @@
 }
 -(void) receiveNotification:(NSNotification *) notification
 {
+    if ([[notification name]isEqualToString:@"KICK_OUT"]) {
+        [self kickOut];
+    }
     if ([[notification name]isEqualToString:@"getRiderInfo"]) {
         if (appdelegate.RiderInfo.count != 0) {
             [UIView beginAnimations:@"animateAddContentView" context:nil];
@@ -130,10 +138,56 @@
     }
     if ([[notification name]isEqualToString:@"updatecurrentStatus"]) {
         [self updateCurrentStatus];
+//        NSLog(@"get distance: %i",appdelegate.GetDistance);
         if (appdelegate.GetDistance!=0) {
+            appdelegate.GetDistance ++;
+            NSString* longitudeCurrent = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
+            NSString* latitudeCurrent = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+            if (appdelegate.GetDistance%2!=0) {
+                lontitudeA=longitudeCurrent;
+                latitudeA=latitudeCurrent;
+            }
+            else
+            {
+                lontitudeB=longitudeCurrent;
+                latitudeB=latitudeCurrent;
+            }
+            CLLocation *A = [[CLLocation alloc]
+                                       initWithLatitude:[latitudeA doubleValue]
+                                       longitude:[lontitudeA doubleValue]];
             
+            CLLocation *B = [[CLLocation alloc]
+                                        initWithLatitude:[latitudeB doubleValue]
+                                        longitude:[lontitudeB doubleValue]];
+            if ([latitudeA isEqual:[NSNull null]] || [latitudeB isEqual:[NSNull null]] || latitudeA ==nil || latitudeB ==nil) {
+                
+            }
+            else{
+                CLLocationDistance distance = [A distanceFromLocation:B];
+                
+                appdelegate.DistancePayment+=distance;
+            }
         }
+        NSString *distanceString = [NSString stringWithFormat:@"%0.1f", appdelegate.DistancePayment/1000];
+        [[NSUserDefaults standardUserDefaults] setObject:distanceString forKey:@"distanceString"];
+//        NSLog(@"distance payment :%f",appdelegate.DistancePayment);
     }
+}
+-(void)kickOut
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"AppLogin" bundle: nil];
+    LoginViewController  *controller = (LoginViewController *)[mainStoryboard instantiateViewControllerWithIdentifier: @"LoginViewController"];
+    [self.navigationController pushViewController:controller animated:YES];
+    NSString* riderId = [[NSUserDefaults standardUserDefaults] stringForKey:@"riderId"];
+    NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+    NSDictionary * dict = [defs dictionaryRepresentation];
+    for (id key in dict) {
+        [defs removeObjectForKey:key];
+    }
+    [defs synchronize];
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [unity LogOut:riderId];
 }
 -(void)showTrip
 {
@@ -167,6 +221,9 @@
 -(void)updateCurrentStatus
 {
     if ([[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"]!=NULL) {
+        [[NSUserDefaults standardUserDefaults] setObject:appdelegate.lontitude forKey:@"longitude"];
+        [[NSUserDefaults standardUserDefaults] setObject:appdelegate.latitude forKey:@"latitude"];
+        
         NSString* longitudeCurrent = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
         NSString* latitudeCurrent = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
@@ -236,13 +293,14 @@
     }
     if (pickRider==1) {
         //picking
+        appdelegate.GetDistance ++;
         [self.btnAcept setTitle:@"Complete" forState:UIControlStateNormal];
         [unity updateTrip:requestid userID:idDriver status:@"PD" owner:self];
     }
     if (pickRider==2) {
         //pickked
         [self.btnAcept setTitle:@"Acept" forState:UIControlStateNormal];
-        [unity updateTrip:requestid userID:idDriver status:@"TC" owner:self];
+//        [unity updateTrip:requestid userID:idDriver status:@"TC" owner:self];
         NSDictionary *rider=[TripDetail objectForKey:@"rider"];
         NSString *name=[NSString stringWithFormat:@"%@ %@",[rider objectForKey:@"firstName"],[rider objectForKey:@"lastName"]];
         NSString *phone=[rider objectForKey:@"phone"];
@@ -262,9 +320,16 @@
             if (annotation != mapview.userLocation)
                 [toRemove addObject:annotation];
         [mapview removeAnnotations:toRemove];
+        NSString *longitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitude"];
+        NSString *latitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitude"];
+        JPSThumbnail *annotationTo = [[JPSThumbnail alloc] init];
+        annotationTo.coordinate = CLLocationCoordinate2DMake([latitude floatValue], [longitude floatValue]);
+        annotationTo.image = [UIImage imageNamed:@"fromMap.png"];
+        [self.mapview addAnnotation:[JPSThumbnailAnnotation annotationWithThumbnail:annotationTo]];
+
         self.ViewDetail.hidden=YES;
         pickRider=0;
-
+        appdelegate.GetDistance ++;
     }
 }
 

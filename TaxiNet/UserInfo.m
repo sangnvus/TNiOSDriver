@@ -9,5 +9,5 @@
 #import "UserInfo.h"
 
 @implementation UserInfo
-@synthesize dataUser;
+@synthesize dataUser,DataAutoLogin;
 @end

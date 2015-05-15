@@ -30,6 +30,9 @@
 		77380C541AFFC8BE00D7DF44 /* RiderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77380C521AFFC8BE00D7DF44 /* RiderInfoViewController.m */; };
 		77380C551AFFC8BE00D7DF44 /* RiderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77380C531AFFC8BE00D7DF44 /* RiderInfoViewController.xib */; };
 		77380C571AFFCE8E00D7DF44 /* call_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 77380C561AFFCE8E00D7DF44 /* call_btn.png */; };
+		77380C5A1B012DCF00D7DF44 /* icon80.png in Resources */ = {isa = PBXBuildFile; fileRef = 77380C581B012DCF00D7DF44 /* icon80.png */; };
+		77380C5B1B012DCF00D7DF44 /* icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 77380C591B012DCF00D7DF44 /* icon120.png */; };
+		77380CA21B04FF1900D7DF44 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77380CA11B04FF1900D7DF44 /* ViewController.m */; };
 		773F04441AEB721A00D9E69A /* AddTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773F04431AEB721A00D9E69A /* AddTripViewController.m */; };
 		773F04471AEB729000D9E69A /* PromotionTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773F04461AEB729000D9E69A /* PromotionTripViewController.m */; };
 		773F04501AEB72B600D9E69A /* SKSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 773F04491AEB72B600D9E69A /* SKSTableView.m */; };
@@ -178,6 +181,10 @@
 		77380C521AFFC8BE00D7DF44 /* RiderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiderInfoViewController.m; sourceTree = "<group>"; };
 		77380C531AFFC8BE00D7DF44 /* RiderInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RiderInfoViewController.xib; sourceTree = "<group>"; };
 		77380C561AFFCE8E00D7DF44 /* call_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = call_btn.png; sourceTree = "<group>"; };
+		77380C581B012DCF00D7DF44 /* icon80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon80.png; sourceTree = "<group>"; };
+		77380C591B012DCF00D7DF44 /* icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120.png; sourceTree = "<group>"; };
+		77380CA01B04FF1900D7DF44 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		77380CA11B04FF1900D7DF44 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		773F04421AEB721A00D9E69A /* AddTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTripViewController.h; sourceTree = "<group>"; };
 		773F04431AEB721A00D9E69A /* AddTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTripViewController.m; sourceTree = "<group>"; };
 		773F04451AEB729000D9E69A /* PromotionTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromotionTripViewController.h; sourceTree = "<group>"; };
@@ -443,7 +450,6 @@
 			isa = PBXGroup;
 			children = (
 				8F7C57C91AFD1AFA00C25062 /* Controller */,
-				8F7C57C81AFD1AF100C25062 /* View */,
 				7733C36B1AC6937B007A15ED /* Model */,
 				774318F71AAC414C001CF128 /* Lib */,
 				774318C81AA74568001CF128 /* Image */,
@@ -484,6 +490,8 @@
 		774318C81AA74568001CF128 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				77380C581B012DCF00D7DF44 /* icon80.png */,
+				77380C591B012DCF00D7DF44 /* icon120.png */,
 				77380C561AFFCE8E00D7DF44 /* call_btn.png */,
 				8F7C57DA1AFE56EA00C25062 /* driver_icon.jpg */,
 				77FE6B3B1AFD3F2E00707233 /* search.png */,
@@ -537,6 +545,8 @@
 				774318DF1AA750BD001CF128 /* NavigationController.m */,
 				774318A21AA73DBA001CF128 /* AppDelegate.h */,
 				774318A31AA73DBA001CF128 /* AppDelegate.m */,
+				77380CA01B04FF1900D7DF44 /* ViewController.h */,
+				77380CA11B04FF1900D7DF44 /* ViewController.m */,
 			);
 			name = AppMain;
 			sourceTree = "<group>";
@@ -687,13 +697,14 @@
 		8F7C57C91AFD1AFA00C25062 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8F7C57D01AFDF84900C25062 /* SubFunction */,
-				8F7C57CA1AFD353E00C25062 /* Profile */,
+				8F7C57C81AFD1AF100C25062 /* View */,
+				774318D11AA74751001CF128 /* AppMain */,
 				774318D21AA7476C001CF128 /* AppLogin */,
 				774318F11AA96359001CF128 /* HomeView */,
+				8F7C57D01AFDF84900C25062 /* SubFunction */,
+				8F7C57CA1AFD353E00C25062 /* Profile */,
 				77F15CDD1AE8C61E004CB232 /* PromotionTrip */,
 				77FDA4821AED2D0B00AECADE /* Payment */,
-				774318D11AA74751001CF128 /* AppMain */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -848,6 +859,7 @@
 				775B5F6C1ADEDE2F00765F4F /* inputMap.png in Resources */,
 				775B5F751AE02A6100765F4F /* setting_button.png in Resources */,
 				7772F4451AD7CFCD00467247 /* From.png in Resources */,
+				77380C5B1B012DCF00D7DF44 /* icon120.png in Resources */,
 				774318EC1AA96029001CF128 /* checkbox_non.png in Resources */,
 				774318D01AA7465A001CF128 /* splast.png in Resources */,
 				774318DB1AA74DAE001CF128 /* Button_fb.png in Resources */,
@@ -857,6 +869,7 @@
 				774318DD1AA74DAE001CF128 /* text_pass.png in Resources */,
 				77F15CF21AE909D0004CB232 /* expandableImage@2x.png in Resources */,
 				773F04541AEB72B600D9E69A /* expandableImage@2x.png in Resources */,
+				77380C5A1B012DCF00D7DF44 /* icon80.png in Resources */,
 				77FDA4811AED180D00AECADE /* backwhile.png in Resources */,
 				774318F01AA961C4001CF128 /* Back.png in Resources */,
 				775B5F701ADEE00E00765F4F /* mapfrom.png in Resources */,
@@ -931,6 +944,7 @@
 				776090D41AADD7F100C21D94 /* ProfileViewController.m in Sources */,
 				8F7C57D61AFDF8B200C25062 /* AboutUsViewController.m in Sources */,
 				774318A11AA73DBA001CF128 /* main.m in Sources */,
+				77380CA21B04FF1900D7DF44 /* ViewController.m in Sources */,
 				774318D71AA747C1001CF128 /* LoginViewController.m in Sources */,
 				772BBE091ABF0EDA0098AB20 /* AFSecurityPolicy.m in Sources */,
 				773F04521AEB72B600D9E69A /* SKSTableViewCellIndicator.m in Sources */,

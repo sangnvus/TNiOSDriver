@@ -36,5 +36,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *mSearchBar;
 @property (nonatomic, assign) MKCoordinateRegion boundingRegion;
 @property (weak, nonatomic) IBOutlet UIView *ViewtabBar;
+@property (weak, nonatomic) IBOutlet UIView *viewFee;
+@property (weak, nonatomic) IBOutlet UILabel *feeLabel;
 
 @end

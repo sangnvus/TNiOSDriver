@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="HbN-0g-XdT" kind="relationship" relationship="rootViewController" id="uqw-WK-jk8"/>
+                        <segue destination="AZo-9m-RIA" kind="relationship" relationship="rootViewController" id="JcF-TY-fZ6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JY7-Hh-LfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -123,12 +123,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nkq-yi-b78" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="437" y="224"/>
+            <point key="canvasLocation" x="795" y="224"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ktw-Ne-bWh">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AZo-9m-RIA" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SWP-OW-1ID"/>
+                        <viewControllerLayoutGuide type="bottom" id="urO-Qz-E3u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pYG-72-sIg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splast.png" translatesAutoresizingMaskIntoConstraints="NO" id="v11-f6-JLv">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="V7P-tT-XI8"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MLM-ZI-ZaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="425" y="224"/>
         </scene>
     </scenes>
     <resources>
         <image name="backgro_login.png" width="1080" height="1824"/>
         <image name="btn_regis.png" width="691" height="147"/>
+        <image name="splast.png" width="1080" height="1824"/>
         <image name="text_email.png" width="895" height="140"/>
         <image name="text_pass.png" width="895" height="140"/>
     </resources>

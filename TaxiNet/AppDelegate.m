@@ -17,7 +17,7 @@
     int updatelocation;
 }
 @synthesize yoursefl,myTripInfo;
-@synthesize locationManager,profileFlag,GetDistance;
+@synthesize locationManager,profileFlag,GetDistance,latitude,lontitude;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -56,9 +56,10 @@
     
     NSLog(@"DEVICE:%@",deviceToke1n);
     profileFlag = @"0";
-    NSLog(@"profile flag:%@,",profileFlag);
     self.deviceToken=deviceToke1n;
     [[NSUserDefaults standardUserDefaults] setObject:deviceToke1n forKey:@"deviceToken"];
+ 
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GetDevideToken" object:self];
 
 //    NSLog(@"My token is: %@", deviceToken);
     
@@ -82,10 +83,8 @@
     CLLocation *currentLocation = newLocation;
     
     if (currentLocation != nil) {
-        NSString *latu = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        NSString *lati = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
-        [[NSUserDefaults standardUserDefaults] setObject:latu forKey:@"longitude"];
-        [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitude"];
+        lontitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
+        latitude = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"updatecurrentStatus" object:self];
 
@@ -104,6 +103,10 @@
     NSString *typePush=[userInfo objectForKey:@"notificationType"];
     if ([typePush isEqualToString:@"PROMOTION_TRIP"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
+    }
+    else if ([[userInfo objectForKey:@"notificationType"]isEqualToString:@"KICK_OUT"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"KICK_OUT" object:self];
     }
     else
     {
