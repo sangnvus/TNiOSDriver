@@ -13,7 +13,8 @@
 
 #import "unity.h"
 // 112.78.6.241
-#define URL @"http://112.78.6.159:8080/taxinet"
+#define URL @"http://192.168.100.5:8080/TN"
+//#define URL @"http://112.78.6.159:8080/taxinet"
 //#define URL @"http://callingme.info/taxinet"
 #define URL_SIGNIN @"/restServices/DriverController/LoginiOS"
 #define UPDATE_URL @"/restServices/DriverController/UpdateDriveriOS"
@@ -30,30 +31,13 @@
 #define UPDATEPROMOTIONTRIP @"/restServices/PromotionTripController/UpdatePromotionTripDetails"
 #define GET_COMPANY_INFO @"/restServices/CompanyController/findCompanyByDriverId"
 #define GET_MYTRIP @"/restServices/TripController/GetListCompleteTripiOS"
+#define AUTOLOGIN @"/restServices/DriverController/AutoLoginiOS"
 
 
 #define URL_UPLOADPHOTO @"/TN/restServices/PromotionTripController/UpdatePromotionTripDetailsiOS"
 
 @implementation unity
-+(void)uploadPhoto:(UIImage *)image imageName:(NSString *)imageName  token:(NSString *)token userID:(NSString*)userid{
-    //data
-    NSString *url=[NSString stringWithFormat:@"%@%@",URL,URL_UPLOADPHOTO];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
-    NSDictionary *parameters = @{@"_user_id":userid,@"_token":token};
-    
-    //init
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-    //show progress
-    AFHTTPRequestOperation *postRequest = [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"avatar" fileName:imageName mimeType:@"image/jpeg"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"offloading" object:self];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"offloading" object:self];
-    }];
-    [postRequest start];
-}
+
 +(void)UpdatePromotionTripDetails: (NSString *)promotionTripId riderId:(NSString *)riderId driverId:(NSString *)driverId status:(NSString *)status
 {
     NSString *url=[NSString stringWithFormat:@"%@%@",URL,UPDATEPROMOTIONTRIP];
@@ -80,7 +64,7 @@
     [manager POST:url parameters:params2
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSLog(@"get LISTPROMOTIONTRIP success");
+         NSLog(@"get LISTPROMOTIONTRIP success:%@",responseObject);
          mode.ArrListPromiton=(NSArray *)responseObject;
          owner.ArrListPromotion=mode.ArrListPromiton;
          [[NSNotificationCenter defaultCenter] postNotificationName:@"NewListPromotin" object:self];
@@ -113,6 +97,7 @@
      }
           failure:
      ^(AFHTTPRequestOperation *operation, NSError *error) {
+
          UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
                                                           message:NSLocalizedString(@"please check internet connection login",nil)
                                                          delegate:self
@@ -166,6 +151,27 @@
               NSLog(@"get FIND_PROMOTION_TRIP_URL failse");
 
           }];
+}
++(void)getTripAuto:(NSString*)DriverID owner:(ViewController *)owner
+{
+    UserInfo *model = [[UserInfo alloc] init];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,GETTRIP];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *param = @ {@"driverId":DriverID};
+    
+    [manager POST:url
+       parameters:param
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"get GETTRIP success");
+              model.dataTrip=[NSDictionary dictionaryWithDictionary:responseObject];
+              owner.dataTrip=model.dataTrip;
+              [owner checkTrip];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"get GETTRIP failse");
+          }];
+
 }
 +(void)getTrip:(NSString*)DriverID owner:(LoginViewController *)owner
 {
@@ -265,7 +271,8 @@
     [manager POST:url
        parameters:param
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"ADDPROMOTIONTRIP success");
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
+              NSLog(@"ADDPROMOTIONTRIP success:%@",responseObject);
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"ADDPROMOTIONTRIP failse");
@@ -309,7 +316,6 @@
     [manager GET:url parameters:nil
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
-         NSLog(@"SUCCESS:%@",responseObject);
          NSUserDefaults *companyInfo = [NSUserDefaults standardUserDefaults];
          [companyInfo setObject:[responseObject objectForKey:@"name"] forKey:@"companyName"];
          [companyInfo setObject:[responseObject objectForKey:@"address"] forKey:@"companyAddress"];
@@ -365,5 +371,29 @@
     
 }
 
++(void)AutoLogin:(NSString *)regId  owner:(ViewController*)owner
+{
+    UserInfo *user=[[UserInfo alloc]init];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL,AUTOLOGIN];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"regId":regId,@"deviceType":@"iOS"};
+    [manager POST:url
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              user.dataUser=[NSDictionary dictionaryWithDictionary:responseObject];
+              owner.dataAutoLogin=user.dataUser;
+              [owner CheckLogin];
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              UIAlertView *alertTmp =[[UIAlertView alloc]initWithTitle:@""
+                                                               message:NSLocalizedString(@"Please check your internet connection",nil)
+                                                              delegate:self
+                                                     cancelButtonTitle:NSLocalizedString(@"OK",nil)
+                                                     otherButtonTitles:nil, nil];
+              [alertTmp show];
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"offAutoLoginloading" object:self];
+              
+          }];
+}
 
 @end

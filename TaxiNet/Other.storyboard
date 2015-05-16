@@ -53,19 +53,19 @@
                                 <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your old password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MBx-fv-SZp">
-                                        <rect key="frame" x="8" y="70" width="304" height="30"/>
+                                        <rect key="frame" x="8" y="70" width="304" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J3f-b6-Yhr">
-                                        <rect key="frame" x="8" y="108" width="304" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New password (6-20 characters)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J3f-b6-Yhr">
+                                        <rect key="frame" x="8" y="113" width="304" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-enter your new password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-sN-gbU">
-                                        <rect key="frame" x="8" y="146" width="304" height="30"/>
+                                        <rect key="frame" x="8" y="156" width="304" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>

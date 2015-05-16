@@ -17,9 +17,10 @@
 #import "DEMOMenuViewController.h"
 #import "MyTripViewController.h"
 #import "MyTripInfo.h"
-
+#import "ViewController.h"
 @class HomeViewController;
 @class PromotionTripViewController;
+@class ViewController;
 @interface unity : NSObject
 
 +(void)login_by_email : (NSString*)email pass:(NSString *)pass regId:(NSString*)regId deviceType:(NSString*)deviceType owner:(LoginViewController*)owner;
@@ -42,5 +43,7 @@
                          password:(NSString*)password owner:(ChangePasswordViewController*)owner;
 +(void)getCompanyInfoWithDriderId:(NSString*)driverId;
 +(void)getMyTripHistoryWithDriverId:(NSString*)driverId onwer:(MyTripViewController*)owner;
++(void)AutoLogin:(NSString *)regId  owner:(ViewController*)owner;
++(void)getTripAuto:(NSString*)DriverID owner:(ViewController *)owner;
 
 @end

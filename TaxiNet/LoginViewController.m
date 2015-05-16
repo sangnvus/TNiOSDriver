@@ -28,7 +28,16 @@
     [self.view addSubview:HUD];
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveNotification:) name:@"offLoginloading" object:nil];
     appdelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self
+                                           action:@selector(hideKeyBoard)];
+    [self.view addGestureRecognizer:tapGesture];
 
+}
+-(void)hideKeyBoard{
+    [self.emailLogin resignFirstResponder];
+    [self.passLogin resignFirstResponder];
+    
 }
 -(void) receiveNotification:(NSNotification *) notification
 {
@@ -65,7 +74,6 @@
     {
         NSString *deviceType = @"iOS";
         [HUD show:YES];
-//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"deviceToken"];
         NSString *deviceToken= appdelegate.deviceToken;
         [unity login_by_email:self.emailLogin.text pass:self.passLogin.text regId:deviceToken deviceType:deviceType  owner:self];
 
@@ -100,7 +108,6 @@
        else
        {
            NSString * driverid=[self.dataUser objectForKey:@"id"];
-           NSLog(@"DRIVER ID id: %@",driverid);
            [[NSUserDefaults standardUserDefaults] setObject:driverid forKey:@"idDriver"];
            [unity getTrip:driverid owner:self];
            

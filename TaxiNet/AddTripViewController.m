@@ -9,6 +9,7 @@
 #import "AddTripViewController.h"
 #import "unity.h"
 #import "HomeViewController.h"
+#import "AppDelegate.h"
 @interface AddTripViewController ()
 @property (nonatomic, strong) MKLocalSearch *localSearch;
 
@@ -16,21 +17,27 @@
 
 @implementation AddTripViewController
 {
-    UITapGestureRecognizer *gestureFrom, *gestureTo, *gestureTime, *gestureSheet;
+    UITapGestureRecognizer *gestureFrom, *gestureTo, *gestureTime, *gestureSheet,*gestureFee;
     BOOL fromselect;
     int locationTabPosition;
     CLLocationCoordinate2D coordinateFrom;
     CLLocationCoordinate2D coordinateTo;
-    NSArray *numbershet;
+    NSMutableArray *numbershet;
     BOOL saveLocation;
     UITableView *mTableViewSuggest;
     NSMutableArray *arrDataSearched;
     UIView *background;
+    UIAlertView *feeTextField;
+    NSString *feeTrip;
+    AppDelegate*appdelegate;
+
 }
-@synthesize viewDetailFrom,viewDetailTo,mImageFocus,mapview,viewDetailSheet,viewDetailTime;
+@synthesize viewDetailFrom,viewDetailTo,mImageFocus,mapview,viewDetailSheet,viewDetailTime,viewFee;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    appdelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     fromselect=FALSE;
     saveLocation=FALSE;
     
@@ -57,6 +64,9 @@
     [self performSelector:@selector(zoomInToMyLocation)
                withObject:nil
                afterDelay:1];
+    gestureFee = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                          action:@selector(selectFeeView:)];
+    [viewFee addGestureRecognizer:gestureFee];
     gestureFrom = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                           action:@selector(selectLocationFrom:)];
     [self.viewDetailFrom addGestureRecognizer:gestureFrom];
@@ -85,8 +95,13 @@
     [[NSUserDefaults standardUserDefaults] setObject:latitude forKey:@"latitudeTo"];
     
     self.DatePicker.date = [NSDate date];
-    numbershet  = [[NSArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6" , nil];
     
+    NSDictionary *vehicle=[appdelegate.yoursefl objectForKey:@"vehicleDTO"];
+    NSInteger capacity=[[vehicle objectForKey:@"capacity"] integerValue];
+    numbershet =[[NSMutableArray alloc]init];
+    for (int i=1; i<=capacity; i++) {
+        [numbershet addObject:[NSString stringWithFormat:@"%i",i]];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -413,14 +428,14 @@
              if (locationTabPosition == 0) {
                  self.txtAdressFrom.text = nameStreet;
                  [[NSUserDefaults standardUserDefaults] setObject:nameStreet forKey:@"adressFromTrip"];
-                 
+                 [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"cityFromTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lotu forKey:@"longitudeFromTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitudeFromTrip"];
                  
              } else {
                  self.txtAdressTo.text = nameStreet;
                  [[NSUserDefaults standardUserDefaults] setObject:nameStreet forKey:@"adressToTrip"];
-                 
+                 [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"cityToTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lotu forKey:@"longitudeToTrip"];
                  [[NSUserDefaults standardUserDefaults] setObject:lati forKey:@"latitudeToTrip"];
              }
@@ -483,14 +498,13 @@
     }
 }
 - (IBAction)AddPromotionTrip:(id)sender {
-    if ([self.txtSheetFree.text isEqualToString:@""] || [self.txtAdressTo.text isEqualToString:@""]|| [self.txtDateTime.text isEqualToString:@""] || [self.txtSheetFree.text isEqualToString:@""]) {
+    if ([self.txtSheetFree.text isEqualToString:@""] || [self.txtAdressTo.text isEqualToString:@""]|| [self.txtDateTime.text isEqualToString:@""] || [self.txtSheetFree.text isEqualToString:@""]|| feeTrip==NULL) {
         UIAlertView *errorAlert = [[UIAlertView alloc]
                                    initWithTitle:@"Add Error" message:@"please input text" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorAlert show];
     }
     else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadListTrip" object:self];
         NSString* idDriver = [[NSUserDefaults standardUserDefaults] stringForKey:@"idDriver"];
         NSString* fromLongitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"longitudeFromTrip"];
         NSString* fromLatitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeFromTrip"];
@@ -499,17 +513,39 @@
         NSString* toLatitude = [[NSUserDefaults standardUserDefaults] stringForKey:@"latitudeToTrip"];
         NSString* toAddress = [[NSUserDefaults standardUserDefaults] stringForKey:@"adressToTrip"];
         NSString* time = [[NSUserDefaults standardUserDefaults] stringForKey:@"TimePromotinTrip"];
+        NSString* cityFrom = [[NSUserDefaults standardUserDefaults] stringForKey:@"cityFromTrip"];
+        NSString* cityTo = [[NSUserDefaults standardUserDefaults] stringForKey:@"cityToTrip"];
         NSString* numberOfseat = self.txtSheetFree.text;
         
         
-        NSString *data = [NSString stringWithFormat:@"{\"id\":\"%@\",\"fromLongitude\":\"%@\",\"fromLatitude\":\"%@\",\"toAddress\":\"%@\",\"fromAddress\":\"%@\",\"toLongitude\":\"%@\",\"toLatitude\":\"%@\",\"time\":\"%@\",\"numberOfseat\":\"%@\",\"fromCity\":\"Ha Noi\",\"toCity\":\"Ha Noi\",\"fee\":\"500000\"}",idDriver,fromLongitude,fromLatitude,toAddress,fromAddress,toLongitude,toLatitude,time,numberOfseat];
-        
+        NSString *data = [NSString stringWithFormat:@"{\"id\":\"%@\",\"fromLongitude\":\"%@\",\"fromLatitude\":\"%@\",\"toAddress\":\"%@\",\"fromAddress\":\"%@\",\"toLongitude\":\"%@\",\"toLatitude\":\"%@\",\"time\":\"%@\",\"numberOfseat\":\"%@\",\"fromCity\":\"%@\",\"toCity\":\"%@\",\"fee\":\"%@\"}",idDriver,fromLongitude,fromLatitude,toAddress,fromAddress,toLongitude,toLatitude,time,numberOfseat,cityFrom,cityTo,feeTrip];
         
         NSData *plainData = [data dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
         [unity AddPromotionTrip:base64String];
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+-(void)selectFeeView:(UIGestureRecognizer *)gesture
+{
+    feeTextField = [[UIAlertView alloc] initWithTitle:@"Please input fee promitontrip"
+                                                     message:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"OK", nil];
+    
+    feeTextField.alertViewStyle = UIAlertViewStylePlainTextInput;
+    feeTextField.tag = 400;
+    [feeTextField show];
+    
+
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UITextField *title1 = [alertView textFieldAtIndex:0];
+    
+    title1= [alertView textFieldAtIndex:0];
+    feeTrip = title1.text;
+    self.feeLabel.text=feeTrip;
 }
 - (IBAction)cancelPicker:(id)sender {
     [UIView beginAnimations:@"animateAddContentView" context:nil];

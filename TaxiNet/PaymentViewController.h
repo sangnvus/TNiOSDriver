@@ -19,5 +19,7 @@
 @property (nonatomic, retain) NSString *phone;
 
 - (IBAction)SentPayment:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *distance;
+@property (weak, nonatomic) IBOutlet UILabel *price;
 
 @end

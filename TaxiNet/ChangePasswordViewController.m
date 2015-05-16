@@ -27,12 +27,25 @@
     
     
     [viewContent setBackgroundColor:[UIColor colorWithRed:0.996 green:0.937 blue:0.906 alpha:1]];
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self
+                                           action:@selector(hideKeyBoard)];
+    
+    [self.view addGestureRecognizer:tapGesture];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)hideKeyBoard{
+    [oldPassword resignFirstResponder];
+    [password resignFirstResponder];
+    [confirmPassword resignFirstResponder];
+    
+    
 }
 
 /*
